@@ -1,0 +1,225 @@
+'use client';
+
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+
+export default function ServicesSection() {
+  const services = [
+    {
+      title: 'Tax-Advantaged Mutual Funds',
+      desc: 'Build a personalized, diversified savings and mutual funds portfolio aligned with your time horizon, risk tolerance, and long-term financial goals.',
+      icon: '/images/icons8-investment-50.png',
+      link: '/tax-free-investment',
+    },
+    {
+      title: 'Term Life Insurance Protection',
+      desc: 'Accessible, affordable, and transparent term life insurance designed to protect your family financially and replace income if anything happens to you.',
+      icon: '/images/icons8-family-50.png',
+      link: '/term-life-insurance',
+    },
+    {
+      title: 'Financial Needs Analysis (FNA)',
+      desc: 'A comprehensive, complimentary financial roadmap that aligns your cash flow, debt acceleration, retirement goals, and emergency safety nets.',
+      icon: '/images/icons8-chart-50.png',
+      link: '/financial-needs-analysis',
+    },
+  ];
+
+  return (
+    <section id="services" className="services-section">
+      <div className="container">
+        {/* Section Header */}
+        <div className="services-header text-center">
+          <span className="section-eyebrow">CORE PRACTICE AREAS</span>
+          <h2 className="services-title">What We Offer</h2>
+          <p className="services-subtitle">
+            Strategic financial guidance and multi-carrier insurance solutions tailored for your life stage.
+          </p>
+        </div>
+
+        {/* 3 Blue-Bordered Service Cards */}
+        <div className="services-grid">
+          {services.map((item, idx) => (
+            <div key={idx} className="offer-card">
+              <div className="offer-icon-wrap">
+                <Image
+                  src={item.icon}
+                  alt={item.title}
+                  width={52}
+                  height={52}
+                  className="offer-icon-img"
+                />
+              </div>
+
+              <h3 className="offer-title">{item.title}</h3>
+
+              <p className="offer-desc">{item.desc}</p>
+
+              <div className="offer-btn-wrap">
+                <Link
+                  href={item.link}
+                  className="offer-pill-btn"
+                >
+                  <span>Explore Service</span>
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Center See All Our Services Button */}
+        <div className="see-all-wrap text-center">
+          <Link href="/services" className="btn-blue-solid see-all-btn">
+            View All Services &amp; Coverage Options
+          </Link>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .services-section {
+          padding: 85px 0 95px;
+          background-color: #f7f9fc;
+        }
+
+        .services-header {
+          text-align: center;
+          margin-bottom: 55px;
+          max-width: 750px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .section-eyebrow {
+          display: inline-block;
+          font-size: 0.82rem;
+          font-weight: 800;
+          letter-spacing: 2px;
+          color: #003399;
+          margin-bottom: 12px;
+        }
+
+        .services-title {
+          font-size: 2.85rem;
+          font-weight: 800;
+          color: #0a1128;
+          letter-spacing: -0.5px;
+          margin-bottom: 14px;
+        }
+
+        .services-subtitle {
+          font-size: 1.05rem;
+          color: #64748b;
+          line-height: 1.6;
+        }
+
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 32px;
+          margin-bottom: 50px;
+        }
+
+        .offer-card {
+          background-color: #ffffff;
+          border: 2px solid #003399;
+          border-radius: 20px;
+          padding: 44px 32px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .offer-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 16px 36px rgba(0, 51, 153, 0.12);
+        }
+
+        .offer-icon-wrap {
+          margin-bottom: 24px;
+          color: #003399;
+        }
+
+        .offer-title {
+          font-size: 1.45rem;
+          font-weight: 700;
+          color: #0a1128;
+          line-height: 1.3;
+          margin-bottom: 18px;
+          min-height: 58px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .offer-desc {
+          font-size: 0.98rem;
+          line-height: 1.65;
+          color: #4a5568;
+          margin-bottom: 32px;
+          flex-grow: 1;
+        }
+
+        .offer-btn-wrap {
+          margin-top: auto;
+        }
+
+        .offer-pill-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background-color: #003399;
+          color: #ffffff;
+          font-size: 0.92rem;
+          font-weight: 600;
+          padding: 10px 24px;
+          border-radius: var(--radius-full);
+          transition: var(--transition);
+        }
+
+        .offer-pill-btn:hover {
+          background-color: #002277;
+          transform: translateY(-2px);
+        }
+
+        .see-all-wrap {
+          text-align: center;
+        }
+
+        .see-all-btn {
+          padding: 14px 36px;
+          font-size: 1rem;
+          border-radius: 8px;
+          display: inline-flex;
+          align-items: center;
+          background-color: #003399;
+          color: #ffffff;
+          font-weight: 700;
+          transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .see-all-btn:hover {
+          background-color: #002277;
+          transform: translateY(-2px);
+        }
+
+        @media (max-width: 991px) {
+          .services-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+          .services-title {
+            font-size: 2.2rem;
+          }
+          .offer-title {
+            min-height: auto;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}

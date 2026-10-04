@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="novaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000050" />
+      <stop offset="60%" stop-color="#003399" />
+      <stop offset="100%" stop-color="#00c2cb" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00c2cb" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#00c2cb" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Rounded App Icon Background -->
+  <rect width="512" height="512" rx="128" fill="url(#novaGrad)" />
+
+  <!-- Outer Subtle Ring -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="6" />
+
+  <!-- Stylized Geometric "N" Monogram with Star / Sparkle Accent -->
+  <g transform="translate(106, 106)" filter="url(#glow)">
+    <!-- Left Pillar -->
+    <path d="M 30,250 L 30,50 C 30,39 39,30 50,30 L 75,30 C 86,30 95,39 95,50 L 95,250 C 95,261 86,270 75,270 L 50,270 C 39,270 30,261 30,250 Z" fill="#ffffff" />
+
+    <!-- Diagonal Beam -->
+    <path d="M 75,35 L 225,245 C 232,255 245,255 252,245 L 255,240 C 262,230 258,218 248,205 L 105,25 Z" fill="url(#accentGrad)" />
+
+    <!-- Right Pillar -->
+    <path d="M 205,250 L 205,50 C 205,39 214,30 225,30 L 250,30 C 261,30 270,39 270,50 L 270,250 C 270,261 261,270 250,270 L 225,270 C 214,270 205,261 205,250 Z" fill="#ffffff" fill-opacity="0.9" />
+
+    <!-- Nova North Star Sparkle Accent at Top Right -->
+    <path d="M 235,15 Q 235,45 205,45 Q 235,45 235,75 Q 235,45 265,45 Q 235,45 235,15 Z" fill="#00c2cb" />
+  </g>
+</svg>
