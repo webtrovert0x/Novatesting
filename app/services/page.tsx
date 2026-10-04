@@ -5,81 +5,48 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Car, HeartPulse, Home, Shield, Users, CheckCircle2, Award } from 'lucide-react';
+import { ArrowRight, ShieldCheck, TrendingUp, Building2, CheckCircle2, Calendar } from 'lucide-react';
 
 export default function ServicesPage() {
-  const allServices = [
+  const pillars = [
     {
-      title: 'Financial Needs Analysis (FNA)',
-      tag: 'FLAGSHIP ADVISORY',
-      forWhom: 'Families, dual-income earners, and business owners seeking an objective, debt-free wealth roadmap.',
-      deliverable: 'A custom 12-page financial blueprint: Income Protection Gap, Debt Roll-Up Matrix, and Retirement Readiness.',
-      timeline: '24 – 48 Hours',
-      costStatus: '100% Complimentary (No Out-of-Pocket Cost)',
-      eligibility: 'Open to all individuals, working families, and diaspora households in authorized U.S. states.',
-      nextStep: 'Request Your Free Snapshot',
-      imageIcon: '/images/icons8-chart-50.png',
-      link: '/financial-needs-analysis',
+      title: 'Strategic Wealth Planning',
+      tag: 'FINANCIAL CLARITY',
+      icon: TrendingUp,
+      desc: 'We work closely with you to evaluate your current financial picture, define meaningful personal objectives, and construct a clear, step-by-step roadmap for sustainable long-term security.',
+      features: [
+        'Personalized cash flow & savings alignment',
+        'Long-term horizon and goal-based modeling',
+        'Structured strategies for milestone readiness',
+        'Objective, pressure-free consultative reviews',
+      ],
+      ctaText: 'Schedule a Planning Session',
     },
     {
-      title: 'Term Life Insurance Protection',
-      tag: 'FAMILY SECURITY',
-      forWhom: 'Parents, mortgage holders, and breadwinners needing income replacement and family debt protection.',
-      deliverable: 'Side-by-side comparison of 10, 20, 30-year level term policies from top A-rated U.S. carriers.',
-      timeline: 'Instant Quotes; 1–2 Weeks Underwriting',
-      costStatus: 'Zero Advisory Fee (Carrier-paid commission)',
-      eligibility: 'Ages 18–75, subject to standard carrier medical and lifestyle underwriting.',
-      nextStep: 'Compare Term Life Quotes',
-      imageIcon: '/images/icons8-family-50.png',
-      link: '/term-life-insurance',
+      title: 'Family & Asset Protection',
+      tag: 'RISK MANAGEMENT',
+      icon: ShieldCheck,
+      desc: 'Protecting what you have built is just as critical as growing it. We provide tailored protection strategies designed to safeguard your loved ones and valuable personal assets against unexpected life events.',
+      features: [
+        'Comprehensive family life & income replacement strategies',
+        'Personal property and casualty coverage evaluation',
+        'Health, medical, and emergency safeguard review',
+        'Independent multi-carrier policy comparisons',
+      ],
+      ctaText: 'Explore Protection Options',
     },
     {
-      title: 'Tax-Advantaged Investments & Savings',
-      tag: 'WEALTH BUILDING',
-      forWhom: 'Investors aiming for tax-free retirement (Roth IRAs) or children\'s college funding (529 / Custodial Roth).',
-      deliverable: 'Personalized compound growth modeling, asset allocation strategy, and registered custodian setup guidance.',
-      timeline: '1 – 3 Business Days to Activate',
-      costStatus: 'Complimentary Consultation & FNA Review',
-      eligibility: 'Must have qualifying IRS earned income for Roth IRA contributions ($7,000/yr limit).',
-      nextStep: 'Model Your Growth Plan',
-      imageIcon: '/images/icons8-investment-50.png',
-      link: '/tax-free-investment',
-    },
-    {
-      title: 'Automobile Insurance',
-      tag: 'PROPERTY & VEHICLE',
-      forWhom: 'Drivers, multi-car households, and commercial vehicle operators seeking lower rates and better coverage.',
-      deliverable: 'Multi-carrier liability, collision, comprehensive, and uninsured motorist quote package.',
-      timeline: 'Same-Day Policy Placement',
-      costStatus: 'Free Rate Comparison',
-      eligibility: 'Licensed drivers with valid registration in Maryland or authorized reciprocal states.',
-      nextStep: 'Request Auto Rate Comparison',
-      icon: Car,
-      link: '/automobile-insurance',
-    },
-    {
-      title: 'Health & Medical Coverage',
-      tag: 'HEALTHCARE SHIELD',
-      forWhom: 'Self-employed individuals, independent contractors, and families seeking affordable healthcare.',
-      deliverable: 'Comprehensive major medical, catastrophic care, preventive wellness, and dental/vision options.',
-      timeline: '1 – 3 Business Days',
-      costStatus: 'Free Plan Consultation',
-      eligibility: 'U.S. residents during open enrollment or qualifying special enrollment life events.',
-      nextStep: 'Review Health Plans',
-      icon: HeartPulse,
-      link: '/health-insurance',
-    },
-    {
-      title: 'Property & Casualty Insurance',
-      tag: 'ASSET INDEMNITY',
-      forWhom: 'Homeowners, condo owners, real estate investors, landlords, and commercial property owners.',
-      deliverable: 'Full replacement value coverage, weather/fire hazard indemnity, and landlord liability shields.',
-      timeline: '24 – 48 Hours Underwriting Review',
-      costStatus: 'Free Property Risk Audit',
-      eligibility: 'Residential, multi-family, or commercial property owners in authorized states.',
-      nextStep: 'Evaluate Property Coverage',
-      icon: Home,
-      link: '/property-insurance',
+      title: 'Business & Commercial Advisory',
+      tag: 'ENTERPRISE CONTINUITY',
+      icon: Building2,
+      desc: 'For entrepreneurs, independent contractors, and business owners, we design protective frameworks that preserve business continuity, manage commercial risk, and protect key stakeholders.',
+      features: [
+        'Business continuity and key stakeholder shields',
+        'Customized commercial risk assessments',
+        'Executive protection and succession structuring',
+        'Proactive annual strategy reviews',
+      ],
+      ctaText: 'Discuss Business Solutions',
     },
   ];
 
@@ -91,8 +58,8 @@ export default function ServicesPage() {
       <section className="page-banner">
         <div className="container">
           <div className="banner-content text-center">
-            <span className="banner-eyebrow">PRACTICE AREAS &amp; SOLUTIONS</span>
-            <h1 className="banner-title">Our Practice Areas &amp; Solutions</h1>
+            <span className="banner-eyebrow">OUR PRACTICE AREAS</span>
+            <h1 className="banner-title">Services &amp; Advisory Solutions</h1>
             <div className="breadcrumbs">
               <Link href="/">Home</Link>
               <span className="crumb-sep">&gt;</span>
@@ -102,84 +69,70 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Intro Section */}
-      <section className="services-intro-section">
+      {/* Intro Header */}
+      <section className="services-main-section">
         <div className="container">
           <div className="intro-header text-center">
-            <span className="section-eyebrow">HOLISTIC PLANNING</span>
+            <span className="section-eyebrow">CONSULTATIVE APPROACH</span>
             <h2 className="section-title">
-              Strategic Guidance. Multi-Carrier Independence.
+              Clear Guidance &amp; Objective Discovery
             </h2>
             <p className="intro-text">
-              At NOVA Finance, we structure our services around solving real client problems rather than pushing disconnected financial products. We clearly separate <strong>Complimentary Financial Education (FNA)</strong> from <strong>Licensed Insurance Brokerage &amp; Custodial Execution</strong> so you receive transparent, pressure-free direction.
+              At NOVA Finance, we don&apos;t make speculative promises or push one-size-fits-all products. We focus on uncovering your real questions, stress-testing vulnerabilities, and guiding you toward well-structured financial and protection choices.
             </p>
           </div>
 
-          {/* 6 Structured Practice Area Cards */}
-          <div className="services-full-grid">
-            {allServices.map((item, idx) => {
-              const LucideIcon = item.icon;
+          {/* 3 Strategic Pillars Grid */}
+          <div className="pillars-grid">
+            {pillars.map((item, idx) => {
+              const IconComp = item.icon;
               return (
-                <div key={idx} className="service-box">
-                  <div className="service-card-top">
-                    <div className="service-icon-wrap">
-                      {item.imageIcon ? (
-                        <Image
-                          src={item.imageIcon}
-                          alt={item.title}
-                          width={48}
-                          height={48}
-                          className="service-img-icon"
-                        />
-                      ) : (
-                        LucideIcon && <LucideIcon size={40} className="s-icon" strokeWidth={1.75} />
-                      )}
+                <div key={idx} className="pillar-card">
+                  <div className="pillar-header">
+                    <div className="pillar-icon-box">
+                      <IconComp size={32} color="#003399" />
                     </div>
-                    <span className="service-tag-pill">{item.tag}</span>
+                    <span className="pillar-tag">{item.tag}</span>
                   </div>
 
-                  <h3 className="service-box-title">{item.title}</h3>
+                  <h3 className="pillar-title">{item.title}</h3>
+                  <p className="pillar-desc">{item.desc}</p>
 
-                  <div className="card-detail-block">
-                    <div className="detail-item-row">
-                      <span className="detail-label">Who it&apos;s for:</span>
-                      <p className="detail-text">{item.forWhom}</p>
-                    </div>
-
-                    <div className="detail-item-row">
-                      <span className="detail-label">What you receive:</span>
-                      <p className="detail-text">{item.deliverable}</p>
-                    </div>
-
-                    <div className="detail-meta-pill-grid">
-                      <div className="meta-pill">
-                        <span className="m-pill-label">Timeline:</span>
-                        <span className="m-pill-val">{item.timeline}</span>
+                  <div className="pillar-features-list">
+                    <h4 className="features-subheading">Key Focus Areas:</h4>
+                    {item.features.map((feat, fIdx) => (
+                      <div key={fIdx} className="feature-line">
+                        <CheckCircle2 size={16} className="feature-check" />
+                        <span>{feat}</span>
                       </div>
-                      <div className="meta-pill">
-                        <span className="m-pill-label">Cost:</span>
-                        <span className="m-pill-val">{item.costStatus}</span>
-                      </div>
-                    </div>
-
-                    <div className="detail-item-row eligibility-row">
-                      <span className="detail-label">Eligibility:</span>
-                      <p className="detail-text">{item.eligibility}</p>
-                    </div>
+                    ))}
                   </div>
 
-                  <div className="card-footer-meta">
-                    <Link
-                      href={item.link}
-                      className="service-box-btn"
-                    >
-                      <span>{item.nextStep}</span>
+                  <div className="pillar-footer">
+                    <Link href="/book-a-consultation" className="pillar-btn">
+                      <span>{item.ctaText}</span>
                       <ArrowRight size={16} />
                     </Link>
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* Bottom Consultation Banner */}
+          <div className="services-cta-card">
+            <div className="cta-left">
+              <h3 className="cta-heading">Curious about your options?</h3>
+              <p className="cta-sub">
+                Schedule a confidential, zero-obligation discovery session with our New York advisory team at One World Trade Center.
+              </p>
+            </div>
+            <div className="cta-right">
+              <Link href="/book-a-consultation" className="btn-cta-white">
+                <Calendar size={18} />
+                <span>Book a Discovery Call</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -218,12 +171,12 @@ export default function ServicesPage() {
         .crumb-sep {
           color: #00c2cb;
         }
-        .services-intro-section {
+        .services-main-section {
           padding: 85px 0 100px;
-          background-color: #f7f9fc;
+          background-color: #f8fafc;
         }
         .intro-header {
-          max-width: 880px;
+          max-width: 800px;
           margin: 0 auto 65px;
           text-align: center;
         }
@@ -236,10 +189,10 @@ export default function ServicesPage() {
           margin-bottom: 12px;
         }
         .section-title {
-          font-size: 2.85rem;
+          font-size: 2.75rem;
           font-weight: 800;
           color: #0a1128;
-          margin-bottom: 20px;
+          margin-bottom: 18px;
           letter-spacing: -0.5px;
         }
         .intro-text {
@@ -247,37 +200,44 @@ export default function ServicesPage() {
           line-height: 1.8;
           color: #4a5568;
         }
-        .services-full-grid {
+        .pillars-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 32px;
+          margin-bottom: 65px;
         }
-        .service-box {
+        .pillar-card {
           background-color: #ffffff;
           border: 1px solid #e2e8f0;
           border-radius: 20px;
-          padding: 38px 30px;
+          padding: 40px 32px;
           display: flex;
           flex-direction: column;
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
-        .service-box:hover {
+        .pillar-card:hover {
           transform: translateY(-6px);
-          box-shadow: 0 16px 36px rgba(0, 51, 153, 0.1);
+          box-shadow: 0 18px 40px rgba(0, 51, 153, 0.1);
           border-color: #003399;
         }
-        .service-card-top {
+        .pillar-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 20px;
+          margin-bottom: 24px;
         }
-        .service-icon-wrap {
-          color: #003399;
+        .pillar-icon-box {
+          width: 60px;
+          height: 60px;
+          border-radius: 14px;
+          background-color: #eef2ff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-        .service-tag-pill {
-          font-size: 0.75rem;
+        .pillar-tag {
+          font-size: 0.72rem;
           font-weight: 800;
           letter-spacing: 1px;
           color: #003399;
@@ -285,108 +245,121 @@ export default function ServicesPage() {
           padding: 5px 12px;
           border-radius: 9999px;
         }
-        .service-box-title {
-          font-size: 1.35rem;
+        .pillar-title {
+          font-size: 1.45rem;
           font-weight: 800;
           color: #0a1128;
           line-height: 1.3;
-          margin-bottom: 16px;
+          margin-bottom: 14px;
         }
-        .card-detail-block {
+        .pillar-desc {
+          font-size: 0.96rem;
+          line-height: 1.65;
+          color: #4a5568;
+          margin-bottom: 28px;
+        }
+        .pillar-features-list {
+          margin-bottom: 32px;
           display: flex;
           flex-direction: column;
           gap: 12px;
-          margin-bottom: 28px;
-        .detail-item-row {
-          display: flex;
-          flex-direction: column;
-          gap: 3px;
+          flex-grow: 1;
         }
-        .detail-label {
-          font-size: 0.78rem;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          color: #003399;
-        }
-        .detail-text {
-          font-size: 0.92rem;
-          line-height: 1.55;
-          color: #4a5568;
-          margin: 0;
-        }
-        .detail-meta-pill-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 8px;
-          background-color: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 8px;
-          padding: 10px 12px;
-          margin: 6px 0;
-        }
-        .meta-pill {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-        }
-        .m-pill-label {
-          font-size: 0.72rem;
-          font-weight: 800;
-          color: #64748b;
-          text-transform: uppercase;
-        }
-        .m-pill-val {
-          font-size: 0.84rem;
+        .features-subheading {
+          font-size: 0.85rem;
           font-weight: 700;
           color: #0a1128;
-          line-height: 1.3;
+          margin-bottom: 4px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
-        .eligibility-row {
-          background-color: #f0fdf4;
-          border-left: 3px solid #16a34a;
-          padding: 8px 10px;
-          border-radius: 0 6px 6px 0;
+        .feature-line {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          font-size: 0.92rem;
+          color: #334155;
+          line-height: 1.5;
         }
-        .eligibility-row .detail-label {
-          color: #166534;
+        :global(.feature-check) {
+          color: #00c2cb;
+          flex-shrink: 0;
+          margin-top: 2px;
         }
-        .eligibility-row .detail-text {
-          color: #14532d;
-          font-size: 0.86rem;
-        }
-        .card-footer-meta {
-          padding-top: 18px;
+        .pillar-footer {
+          margin-top: auto;
+          padding-top: 20px;
           border-top: 1px solid #f1f5f9;
         }
-        .service-box-btn {
+        .pillar-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
           gap: 8px;
+          width: 100%;
           background-color: #003399;
           color: #ffffff;
-          font-size: 0.92rem;
+          font-size: 0.94rem;
           font-weight: 700;
-          padding: 12px 20px;
-          border-radius: 8px;
+          padding: 13px 20px;
+          border-radius: 10px;
           transition: var(--transition);
         }
-        .service-box-btn:hover {
+        .pillar-btn:hover {
           background-color: #002277;
           transform: translateY(-2px);
         }
-        @media (max-width: 1024px) {
-          .services-full-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+        .services-cta-card {
+          background-color: #000050;
+          border-radius: 20px;
+          padding: 45px 50px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 30px;
+          color: #ffffff;
         }
-        @media (max-width: 650px) {
-          .services-full-grid {
+        .cta-heading {
+          font-size: 1.85rem;
+          font-weight: 800;
+          margin-bottom: 8px;
+          color: #ffffff;
+        }
+        .cta-sub {
+          font-size: 1rem;
+          color: #cbd5e1;
+          margin: 0;
+          max-width: 650px;
+          line-height: 1.6;
+        }
+        .btn-cta-white {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background-color: #00c2cb;
+          color: #000050;
+          font-size: 1.02rem;
+          font-weight: 800;
+          padding: 15px 32px;
+          border-radius: 10px;
+          white-space: nowrap;
+          transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .btn-cta-white:hover {
+          background-color: #ffffff;
+          transform: translateY(-2px);
+        }
+        @media (max-width: 1024px) {
+          .pillars-grid {
             grid-template-columns: 1fr;
           }
-          .section-title {
-            font-size: 2.2rem;
+          .services-cta-card {
+            flex-direction: column;
+            text-align: center;
+            padding: 35px 24px;
+          }
+          .cta-sub {
+            max-width: 100%;
           }
         }
       `}</style>

@@ -6,23 +6,23 @@ import Image from 'next/image';
 export default function WhyChooseUs() {
   const pillars = [
     {
-      title: 'Integrity',
-      desc: 'Honest, transparent advice — no smoke, no fluff.',
+      title: 'Unbiased Inquiry',
+      desc: 'Thoughtful, transparent discovery without high-pressure sales or quotas.',
       icon: '/images/icons8-integrity-50.png',
     },
     {
-      title: 'Expertise',
-      desc: 'Experience in finance, business, and real-world markets.',
+      title: 'Clarity Over Hype',
+      desc: 'No inflated return claims or get-rich promises—just honest, disciplined strategy.',
       icon: '/images/icons8-expertise-50-1.png',
     },
     {
-      title: 'Growth-minded',
-      desc: 'We design long-term strategies, not short-term quick fixes.',
+      title: 'Stress-Tested Design',
+      desc: 'We explore worst-case and best-case scenarios to build enduring resilience.',
       icon: '/images/icons8-growth-50.png',
     },
     {
-      title: 'Client-focused',
-      desc: 'Personalized solutions that reflect your unique situation.',
+      title: 'Personal Alignment',
+      desc: 'Custom roadmaps crafted specifically around your life stage and priorities.',
       icon: '/images/icons8-client-50.png',
     },
   ];

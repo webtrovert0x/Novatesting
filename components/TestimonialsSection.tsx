@@ -17,7 +17,7 @@ export default function TestimonialsSection() {
     },
     {
       name: 'Nathan Felix',
-      location: 'Maryland, USA',
+      location: 'New York, USA',
       avatar: '/images/testimonial-1-1.png',
       topic: 'FAMILY PROTECTION',
       emoji: '😊',

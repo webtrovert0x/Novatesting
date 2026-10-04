@@ -43,7 +43,7 @@ export async function getWordPressPosts(limit: number = 10): Promise<WPPost[]> {
       title: { rendered: post.title?.rendered || '' },
       content: { rendered: post.content?.rendered || '' },
       excerpt: { rendered: post.excerpt?.rendered || '' },
-      author_name: post._embedded?.author?.[0]?.name || 'Olamide Abayomi',
+      author_name: post._embedded?.author?.[0]?.name || 'Nova Finance Advisory',
       featured_media_url: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || null,
       categories_names: post._embedded?.['wp:term']?.[0]?.map((t: any) => t.name) || ['Financial Education'],
     }));
@@ -79,7 +79,7 @@ export async function getWordPressPostBySlug(slug: string): Promise<WPPost | nul
       title: { rendered: post.title?.rendered || '' },
       content: { rendered: post.content?.rendered || '' },
       excerpt: { rendered: post.excerpt?.rendered || '' },
-      author_name: post._embedded?.author?.[0]?.name || 'Olamide Abayomi',
+      author_name: post._embedded?.author?.[0]?.name || 'Nova Finance Advisory',
       featured_media_url: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || null,
       categories_names: post._embedded?.['wp:term']?.[0]?.map((t: any) => t.name) || ['Financial Education'],
     };

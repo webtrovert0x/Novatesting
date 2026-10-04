@@ -73,7 +73,7 @@ export default function TermsPage() {
               <h2>6. Inquiries & Legal Notices</h2>
               <div className="contact-info-box">
                 <p><strong>NOVA Finance by Tainaliel</strong></p>
-                <p>Glen Burnie, Maryland, USA</p>
+                <p>One World Trade Center, Suite 8500, New York, NY 10007, USA</p>
                 <p>Email: <a href="mailto:consult@tainaliel.com">consult@tainaliel.com</a></p>
                 <p>Phone: <a href="tel:+14437136416">+1 (443) 713-6416</a></p>
               </div>

@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Target, Compass, Award, Shield, Users, TrendingUp, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Target, Compass, Shield, Award, Users, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export default function AboutCompanyPage() {
   return (
@@ -16,24 +16,25 @@ export default function AboutCompanyPage() {
       <section className="page-banner">
         <div className="container">
           <div className="banner-content text-center">
-            <h1 className="banner-title">About NOVA Finance</h1>
+            <span className="banner-eyebrow">ABOUT NOVA FINANCE</span>
+            <h1 className="banner-title">Our Story &amp; Philosophy</h1>
             <div className="breadcrumbs">
               <Link href="/">Home</Link>
               <span className="crumb-sep">&gt;</span>
-              <span>About Company</span>
+              <span>About Us</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Who We Are & Executive Background */}
+      {/* Who We Are & Heritage */}
       <section className="about-intro-section">
         <div className="container">
           <div className="intro-header text-center">
-            <span className="section-eyebrow">OUR HERITAGE & MISSION</span>
-            <h2 className="section-title">Who We Are</h2>
+            <span className="section-eyebrow">MISSION &amp; PURPOSE</span>
+            <h2 className="section-title">Guiding You Toward Sustainable Financial Clarity</h2>
             <p className="intro-lead">
-              NOVA Finance is the dedicated financial consulting and wealth protection division of <strong>Tainaliel</strong>, founded by <strong>Olamide Abayomi (Tainaliel)</strong>. Headquartered in Glen Burnie, Maryland, we empower working families, entrepreneurs, and diaspora professionals across U.S. jurisdictions with transparent, licensed, and results-driven financial strategies.
+              NOVA Finance is the dedicated financial consulting and wealth protection division of <strong>Tainaliel</strong>. Headquartered at One World Trade Center, New York, NY, we partner with individuals, families, and entrepreneurs to simplify complex decisions, safeguard assets, and create structured long-term pathways.
             </p>
           </div>
 
@@ -41,125 +42,28 @@ export default function AboutCompanyPage() {
           <div className="mv-grid">
             <div className="mv-card">
               <div className="mv-icon-box">
-                <Target size={36} />
+                <Target size={36} color="#003399" />
               </div>
               <h3 className="mv-title">Our Mission</h3>
               <p className="mv-text">
-                To simplify wealth building, demystify life insurance protection, and provide transparent access to personalized financial roadmaps that safeguard families and help capital compound safely across generations.
+                To eliminate confusion and high-pressure sales from the financial planning process, providing transparent access to customized roadmaps that protect what matters most and build lasting security.
               </p>
             </div>
 
             <div className="mv-card">
               <div className="mv-icon-box">
-                <Compass size={36} />
+                <Compass size={36} color="#003399" />
               </div>
-              <h3 className="mv-title">Our Vision</h3>
+              <h3 className="mv-title">Our Philosophy</h3>
               <p className="mv-text">
-                To stand as the most trusted, compliant, and impactful financial advisory and protection partner for everyday earners and business owners seeking clarity, dignity, and generational wealth.
+                Every individual and business has a unique story. We listen first, analyze objective priorities, and collaborate with you on tailored solutions designed for your specific life stage and goals.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Founder & Advisory Philosophy */}
-      <section className="about-details-section">
-        <div className="container">
-          <div className="details-grid">
-            <div className="details-img-wrap">
-              <Image
-                src="/images/offer-1-1.jpg"
-                alt="Nova Finance Advisory Team and Founder"
-                width={520}
-                height={450}
-                className="details-img"
-              />
-            </div>
-            <div className="details-content">
-              <span className="section-eyebrow">LICENSED & INDEPENDENT</span>
-              <h2 className="details-heading">
-                Clarity, Integrity, and Multi-Carrier Choice
-              </h2>
-              <p className="details-p">
-                We believe that every family deserves fiduciary-minded direction without high-pressure sales tactics. Our licensed advisors evaluate your actual cashflow, debt structure, retirement goals, and family protection needs before designing a tailored roadmap.
-              </p>
-              <div className="pillars-mini-grid">
-                <div className="mini-pillar">
-                  <Shield size={20} className="mini-icon" />
-                  <span>Licensed in MD &amp; U.S.</span>
-                </div>
-                <div className="mini-pillar">
-                  <Award size={20} className="mini-icon" />
-                  <span>Multi-Carrier Choice</span>
-                </div>
-                <div className="mini-pillar">
-                  <Users size={20} className="mini-icon" />
-                  <span>Complimentary FNA</span>
-                </div>
-                <div className="mini-pillar">
-                  <TrendingUp size={20} className="mini-icon" />
-                  <span>Long-Term Support</span>
-                </div>
-              </div>
-              <div className="details-cta">
-                <Link href="/financial-needs-analysis" className="btn-blue-solid">
-                  <span>Get Your Free Financial Needs Analysis</span>
-                  <ArrowRight size={18} />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Operating Model & Compliance Overview */}
-      <section className="operating-model-section">
-        <div className="container">
-          <div className="model-header text-center">
-            <span className="section-eyebrow">REGULATORY TRANSPARENCY</span>
-            <h2 className="section-title">Our Operating Model & Legal Framework</h2>
-            <p className="intro-lead">
-              Clear structure, authorized licensing, and multi-carrier independence designed to protect your interests.
-            </p>
-          </div>
-
-          <div className="model-grid">
-            <div className="model-card">
-              <div className="model-num">01</div>
-              <h3 className="model-title">Legal Entity & Jurisdiction</h3>
-              <p className="model-text">
-                Operated by <strong>NOVA Finance by Tainaliel LLC</strong>, headquartered in Glen Burnie, Maryland. We proudly serve clients across Maryland and authorized U.S. jurisdictions, providing specialized financial strategies for working families and diaspora professionals.
-              </p>
-            </div>
-
-            <div className="model-card">
-              <div className="model-num">02</div>
-              <h3 className="model-title">Licensed Multi-Carrier Brokerage</h3>
-              <p className="model-text">
-                Insurance solutions (Life, Auto, Health, Property & Casualty) are brokered through licensed insurance producers appointed with leading, A-rated U.S. carriers. We represent you—not a single captive insurer.
-              </p>
-            </div>
-
-            <div className="model-card">
-              <div className="model-num">03</div>
-              <h3 className="model-title">Educational Wealth Strategy</h3>
-              <p className="model-text">
-                Our Financial Needs Analysis (FNA) and retirement modeling are educational tools. Product implementations (e.g. Custodial Roth IRAs, Mutual Funds) are executed through registered third-party broker-dealers and custodians.
-              </p>
-            </div>
-
-            <div className="model-card">
-              <div className="model-num">04</div>
-              <h3 className="model-title">Transparent Compensation</h3>
-              <p className="model-text">
-                Your initial consultation and Financial Needs Analysis are 100% complimentary. When insurance policies are placed, our brokerage is compensated directly by carrier commissions at no additional cost to you.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Founder & Advisory Leadership */}
+      {/* Leadership & Advisory Practice Section */}
       <section className="founder-section">
         <div className="container">
           <div className="founder-card">
@@ -167,39 +71,39 @@ export default function AboutCompanyPage() {
               <div className="founder-avatar-frame">
                 <Image
                   src="/images/offer-1-1.jpg"
-                  alt="Olamide Abayomi (Tainaliel) - Founder & Principal"
-                  width={400}
-                  height={420}
+                  alt="Nova Finance Advisory Team"
+                  width={420}
+                  height={440}
                   className="founder-photo"
                 />
               </div>
             </div>
             <div className="founder-info-col">
-              <span className="section-eyebrow">LEADERSHIP &amp; FIDUCIARY ETHOS</span>
-              <h2 className="founder-name">Olamide Abayomi (Tainaliel)</h2>
-              <p className="founder-title">Founder &amp; Managing Principal | Licensed Producer</p>
+              <span className="section-eyebrow">OUR ADVISORY PRACTICE</span>
+              <h2 className="founder-name">Client-First Wealth Leadership</h2>
+              <p className="founder-title">NOVA Finance by Tainaliel Advisory Group</p>
               
               <div className="founder-bio">
                 <p>
-                  Olamide Abayomi founded NOVA Finance under <strong>Tainaliel</strong> to bridge the critical gap between complex financial systems and working households. With deep roots in the Maryland community and years of hands-on experience guiding families and diaspora earners, Olamide champions a transparent, education-first advisory model.
+                  NOVA Finance was established under Tainaliel with a single, clear objective: to make strategic financial planning and asset protection accessible, understandable, and client-centric.
                 </p>
                 <p>
-                  As an independent insurance producer licensed in the State of Maryland with reciprocal multi-state authority, Olamide is appointed with premier A-rated insurance carriers across the United States. His advisory practice is founded on three pillars: zero high-pressure sales, complete fiduciary clarity, and generational wealth building through disciplined mathematical modeling.
+                  Our advisory team champions a relationship-first model. Rather than promoting one-size-fits-all products, our practice focuses on structured discovery, objective risk management, and long-term partnership with families and emerging business leaders.
                 </p>
               </div>
 
               <div className="founder-badges-row">
                 <div className="f-badge">
-                  <strong>State of Maryland</strong>
-                  <span>Resident Producer</span>
+                  <strong>New York Office</strong>
+                  <span>One World Trade Center</span>
                 </div>
                 <div className="f-badge">
-                  <strong>Multi-Carrier</strong>
-                  <span>Independent Broker</span>
+                  <strong>Relationship First</strong>
+                  <span>Objective Advisory</span>
                 </div>
                 <div className="f-badge">
-                  <strong>Specialization</strong>
-                  <span>FNA &amp; Wealth Strategy</span>
+                  <strong>Customized Blueprints</strong>
+                  <span>Goal-Aligned Strategies</span>
                 </div>
               </div>
             </div>
@@ -207,76 +111,55 @@ export default function AboutCompanyPage() {
         </div>
       </section>
 
-      {/* Anonymized Client Case Studies */}
-      <section className="case-studies-section">
+      {/* 4 Core Pillars of Trust */}
+      <section className="values-section">
         <div className="container">
           <div className="section-header text-center">
-            <span className="section-eyebrow">PROVEN OUTCOMES</span>
-            <h2 className="section-title">Real-World Case Studies</h2>
-            <p className="intro-lead">
-              Anonymized examples of how tailored financial roadmaps protect families and build lasting assets.
-            </p>
+            <span className="section-eyebrow">OUR CORE VALUES</span>
+            <h2 className="section-title">The Principles That Guide Us</h2>
           </div>
 
-          <div className="case-grid">
-            <div className="case-card">
-              <div className="case-tag">CASE 01: FAMILY PROTECTION</div>
-              <h3 className="case-title">Dual-Income Working Family</h3>
-              <div className="case-meta">Location: Silver Spring, MD | Household: 2 Adults, 2 Children</div>
-              <div className="case-body">
-                <p><strong>Challenge:</strong> $420,000 mortgage with only basic employer-provided group life insurance (1x salary), leaving the family vulnerable to income loss.</p>
-                <p><strong>Solution:</strong> Structured individual 30-year Term Life coverage ($750K per parent) and established two Custodial Roth IRAs ($150/mo each) for children&apos;s future compounding.</p>
-                <p className="case-result"><strong>Outcome:</strong> 100% mortgage &amp; college replacement secured at $74/month total premium outlay.</p>
-              </div>
+          <div className="values-grid">
+            <div className="value-card">
+              <div className="value-icon"><Shield size={28} color="#003399" /></div>
+              <h3 className="value-title">Integrity &amp; Trust</h3>
+              <p className="value-desc">We operate with complete transparency, putting your best interests and long-term peace of mind at the center of every conversation.</p>
             </div>
 
-            <div className="case-card">
-              <div className="case-tag">CASE 02: DEBT &amp; WEALTH</div>
-              <h3 className="case-title">Healthcare Professional</h3>
-              <div className="case-meta">Location: Baltimore, MD | Goal: Debt Roll-Up &amp; Roth Strategy</div>
-              <div className="case-body">
-                <p><strong>Challenge:</strong> $34,000 in high-interest credit card and personal loan debt with zero structured retirement savings outside employer 401(k).</p>
-                <p><strong>Solution:</strong> Executed a structured Financial Needs Analysis (FNA) debt acceleration roadmap, reallocating cashflow without increasing monthly spend.</p>
-                <p className="case-result"><strong>Outcome:</strong> Debt eliminated in 26 months, saving $8,400 in interest and redirecting $600/mo into tax-advantaged mutual funds.</p>
-              </div>
+            <div className="value-card">
+              <div className="value-icon"><Award size={28} color="#003399" /></div>
+              <h3 className="value-title">Clarity Over Complexity</h3>
+              <p className="value-desc">We demystify financial and protection options, translating complex concepts into straightforward, actionable steps.</p>
             </div>
 
-            <div className="case-card">
-              <div className="case-tag">CASE 03: BUSINESS CONTINUITY</div>
-              <h3 className="case-title">Independent Contractor / SME</h3>
-              <div className="case-meta">Location: Glen Burnie, MD | Business: Logistics &amp; Transport</div>
-              <div className="case-body">
-                <p><strong>Challenge:</strong> Disjointed commercial auto and personal health coverage with rising premiums and lack of disability/key-person protection.</p>
-                <p><strong>Solution:</strong> Re-shopped commercial property &amp; casualty across independent carrier network and added key-person term coverage.</p>
-                <p className="case-result"><strong>Outcome:</strong> Reduced annual insurance overhead by 18% while expanding liability protection limits.</p>
-              </div>
+            <div className="value-card">
+              <div className="value-icon"><Users size={28} color="#003399" /></div>
+              <h3 className="value-title">Dedicated Partnership</h3>
+              <p className="value-desc">Your financial journey evolves over time. We provide ongoing reviews and continuous guidance as your life and business grow.</p>
+            </div>
+
+            <div className="value-card">
+              <div className="value-icon"><Target size={28} color="#003399" /></div>
+              <h3 className="value-title">Personalized Strategy</h3>
+              <p className="value-desc">No generic formulas. Every roadmap is uniquely structured to align with your personal goals and risk profile.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Downloadable / Viewable Deliverable Preview */}
-      <section className="deliverable-section">
+      {/* Bottom CTA Banner */}
+      <section className="about-cta-section">
         <div className="container">
-          <div className="deliverable-card">
-            <div className="deliverable-content">
-              <span className="section-eyebrow">WHAT YOU RECEIVE</span>
-              <h2 className="deliverable-title">Your Complimentary Financial Needs Analysis Deliverable</h2>
-              <p className="deliverable-desc">
-                When you complete an FNA with NOVA Finance, you receive a comprehensive, personalized 12-page financial blueprint including:
-              </p>
-              <ul className="deliverable-list">
-                <li><CheckCircle2 size={18} className="deliv-check" /> <span><strong>Income Protection Calculator:</strong> Exact survivor income replacement requirements.</span></li>
-                <li><CheckCircle2 size={18} className="deliv-check" /> <span><strong>Debt Roll-Up Matrix:</strong> Step-by-step payoff schedule to reach 100% debt freedom early.</span></li>
-                <li><CheckCircle2 size={18} className="deliv-check" /> <span><strong>Retirement Readiness Audit:</strong> Projected accumulation gap at age 65 under current savings.</span></li>
-                <li><CheckCircle2 size={18} className="deliv-check" /> <span><strong>Multi-Carrier Quote Comparison:</strong> Unbiased side-by-side policy terms from top A-rated insurers.</span></li>
-              </ul>
-              <div className="deliverable-btn-row">
-                <Link href="/financial-needs-analysis" className="btn-blue-solid">
-                  <span>Request Your Custom FNA Blueprint</span>
-                  <ArrowRight size={18} />
-                </Link>
-              </div>
+          <div className="cta-banner-box text-center">
+            <h2 className="cta-title">Let&apos;s Build Your Financial Roadmap Together</h2>
+            <p className="cta-text">
+              Book a complimentary consultation with our team to explore your options and gain clear direction.
+            </p>
+            <div className="cta-btn-wrap">
+              <Link href="/book-a-consultation" className="btn-pill-primary">
+                <span>Book a Consultation</span>
+                <ArrowRight size={18} />
+              </Link>
             </div>
           </div>
         </div>
@@ -290,6 +173,14 @@ export default function AboutCompanyPage() {
           color: #ffffff;
           padding: 70px 0;
           text-align: center;
+        }
+        .banner-eyebrow {
+          display: inline-block;
+          font-size: 0.82rem;
+          font-weight: 800;
+          letter-spacing: 2px;
+          color: #00c2cb;
+          margin-bottom: 12px;
         }
         .banner-title {
           font-size: 3rem;
@@ -309,11 +200,11 @@ export default function AboutCompanyPage() {
           color: #00c2cb;
         }
         .about-intro-section {
-          padding: 85px 0 60px;
+          padding: 85px 0 65px;
           background-color: #ffffff;
         }
         .intro-header {
-          max-width: 880px;
+          max-width: 820px;
           margin: 0 auto 60px;
           text-align: center;
         }
@@ -329,7 +220,8 @@ export default function AboutCompanyPage() {
           font-size: 2.75rem;
           font-weight: 800;
           color: #0a1128;
-          margin-bottom: 24px;
+          margin-bottom: 20px;
+          letter-spacing: -0.5px;
         }
         .intro-lead {
           font-size: 1.15rem;
@@ -355,12 +247,11 @@ export default function AboutCompanyPage() {
           transform: translateY(-4px);
         }
         .mv-icon-box {
-          color: #003399;
           margin-bottom: 20px;
         }
         .mv-title {
-          font-size: 1.6rem;
-          font-weight: 700;
+          font-size: 1.55rem;
+          font-weight: 800;
           color: #0a1128;
           margin-bottom: 14px;
         }
@@ -369,125 +260,8 @@ export default function AboutCompanyPage() {
           line-height: 1.7;
           color: #4a5568;
         }
-        .about-details-section {
-          padding: 70px 0 95px;
-          background-color: #f7f9fc;
-        }
-        .details-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.1fr;
-          gap: 50px;
-          align-items: center;
-        }
-        .details-img-wrap {
-          border-radius: 18px;
-          overflow: hidden;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        }
-        .details-img {
-          width: 100%;
-          height: auto;
-          display: block;
-        }
-        .details-heading {
-          font-size: 2.3rem;
-          font-weight: 800;
-          color: #0a1128;
-          margin-bottom: 18px;
-          line-height: 1.25;
-        }
-        .details-p {
-          font-size: 1.02rem;
-          line-height: 1.75;
-          color: #4a5568;
-          margin-bottom: 24px;
-        }
-        .pillars-mini-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-          margin-bottom: 32px;
-        }
-        .mini-pillar {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          color: #0a1128;
-          font-size: 0.95rem;
-          font-weight: 600;
-        }
-        .mini-icon {
-          color: #003399;
-          flex-shrink: 0;
-        }
-        .btn-blue-solid {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          background-color: #003399;
-          color: #ffffff;
-          padding: 14px 28px;
-          border-radius: 8px;
-          font-weight: 700;
-          transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-        .btn-blue-solid:hover {
-          background-color: #002277;
-          transform: translateY(-2px);
-        }
-        .operating-model-section {
-          padding: 85px 0 95px;
-          background-color: #ffffff;
-        }
-        .model-header {
-          max-width: 800px;
-          margin: 0 auto 50px;
-        }
-        .model-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 28px;
-        }
-        .model-card {
-          background-color: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 16px;
-          padding: 36px 32px;
-          position: relative;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .model-card:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 25px rgba(0, 51, 153, 0.06);
-          border-color: #cbd5e1;
-        }
-        .model-num {
-          font-size: 1.5rem;
-          font-weight: 800;
-          color: #003399;
-          background-color: #e6f0fa;
-          width: 44px;
-          height: 44px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 10px;
-          margin-bottom: 20px;
-        }
-        .model-title {
-          font-size: 1.35rem;
-          font-weight: 700;
-          color: #0a1128;
-          margin-bottom: 12px;
-        }
-        .model-text {
-          font-size: 0.98rem;
-          line-height: 1.7;
-          color: #4a5568;
-        }
-        /* Founder Section */
         .founder-section {
-          padding: 80px 0;
+          padding: 75px 0;
           background-color: #f8fafc;
         }
         .founder-card {
@@ -524,7 +298,7 @@ export default function AboutCompanyPage() {
           margin-bottom: 20px;
         }
         .founder-bio p {
-          font-size: 1rem;
+          font-size: 1.02rem;
           line-height: 1.75;
           color: #4a5568;
           margin-bottom: 16px;
@@ -551,128 +325,90 @@ export default function AboutCompanyPage() {
           font-size: 0.8rem;
           color: #3b82f6;
         }
-
-        /* Case Studies */
-        .case-studies-section {
+        .values-section {
           padding: 85px 0 95px;
           background-color: #ffffff;
         }
-        .section-header {
-          max-width: 800px;
-          margin: 0 auto 55px;
-        }
-        .case-grid {
+        .values-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 28px;
         }
-        .case-card {
+        .value-card {
           background-color: #f8fafc;
           border: 1px solid #e2e8f0;
           border-radius: 16px;
-          padding: 32px 28px;
-          display: flex;
-          flex-direction: column;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          padding: 32px 24px;
+          text-align: left;
+          transition: transform 0.2s ease, border-color 0.2s ease;
         }
-        .case-card:hover {
+        .value-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 10px 25px rgba(0, 51, 153, 0.08);
-          border-color: #cbd5e1;
+          border-color: #003399;
         }
-        .case-tag {
-          font-size: 0.75rem;
-          font-weight: 800;
-          letter-spacing: 1px;
-          color: #003399;
-          margin-bottom: 10px;
-        }
-        .case-title {
-          font-size: 1.3rem;
-          font-weight: 700;
-          color: #0a1128;
-          margin-bottom: 6px;
-        }
-        .case-meta {
-          font-size: 0.82rem;
-          color: #64748b;
+        .value-icon {
           margin-bottom: 16px;
-          padding-bottom: 12px;
-          border-bottom: 1px solid #e2e8f0;
         }
-        .case-body p {
-          font-size: 0.92rem;
-          line-height: 1.65;
-          color: #4a5568;
+        .value-title {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: #0a1128;
           margin-bottom: 10px;
         }
-        .case-result {
-          background-color: #f0fdf4;
-          border: 1px solid #86efac;
-          border-radius: 6px;
-          padding: 8px 12px;
-          color: #166534 !important;
-          margin-top: 12px;
+        .value-desc {
+          font-size: 0.92rem;
+          line-height: 1.6;
+          color: #4a5568;
+          margin: 0;
         }
-
-        /* Deliverable Section */
-        .deliverable-section {
+        .about-cta-section {
           padding: 0 0 90px;
           background-color: #ffffff;
         }
-        .deliverable-card {
+        .cta-banner-box {
           background-color: #000050;
-          color: #ffffff;
           border-radius: 20px;
-          padding: 55px 60px;
+          padding: 55px 40px;
+          color: #ffffff;
         }
-        .deliverable-title {
+        .cta-title {
           font-size: 2.3rem;
           font-weight: 800;
+          margin-bottom: 14px;
           color: #ffffff;
-          margin-bottom: 16px;
         }
-        .deliverable-desc {
-          font-size: 1.05rem;
+        .cta-text {
+          font-size: 1.1rem;
           color: #cbd5e1;
-          margin-bottom: 28px;
-          max-width: 800px;
+          margin-bottom: 30px;
+          max-width: 650px;
+          margin-left: auto;
+          margin-right: auto;
         }
-        .deliverable-list {
-          list-style: none;
-          padding: 0;
-          margin: 0 0 35px;
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
+        .btn-cta-blue {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background-color: #00c2cb;
+          color: #000050;
+          font-size: 1.02rem;
+          font-weight: 800;
+          padding: 15px 32px;
+          border-radius: 10px;
+          transition: background-color 0.2s ease, transform 0.2s ease;
         }
-        .deliverable-list li {
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
-          font-size: 0.96rem;
-          color: #f1f5f9;
+        .btn-cta-blue:hover {
+          background-color: #ffffff;
+          transform: translateY(-2px);
         }
-        .deliv-check {
-          color: #00c2cb;
-          flex-shrink: 0;
-          margin-top: 3px;
-        }
-        .deliverable-btn-row {
-          margin-top: 10px;
-        }
-
         @media (max-width: 991px) {
           .mv-grid,
-          .details-grid,
-          .model-grid,
           .founder-card,
-          .case-grid,
-          .deliverable-list {
+          .values-grid {
             grid-template-columns: 1fr;
           }
-          .deliverable-card {
-            padding: 35px 25px;
+          .founder-card {
+            padding: 30px 20px;
           }
           .banner-title {
             font-size: 2.4rem;

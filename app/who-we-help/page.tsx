@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Users, Briefcase, Building2, Globe2, ArrowRight, ShieldCheck, CheckCircle2, TrendingUp, DollarSign } from 'lucide-react';
 
 export default function WhoWeHelpPage() {
-  const [activeAudience, setActiveAudience] = useState<'families' | 'entrepreneurs' | 'small-business' | 'diaspora'>('families');
+  const [activeAudience, setActiveAudience] = useState<'families' | 'entrepreneurs' | 'small-business' | 'international'>('families');
 
   const audiences = [
     {
@@ -77,20 +77,20 @@ export default function WhoWeHelpPage() {
       ],
     },
     {
-      id: 'diaspora',
-      label: 'Diaspora & Global Earners',
+      id: 'international',
+      label: 'Global & International Clients',
       icon: Globe2,
-      headline: 'Cross-Border Wealth Structuring & U.S. Jurisdiction Protection',
-      tagline: 'Compliant USD financial roadmaps for immigrant professionals and diaspora families.',
+      headline: 'Cross-Border Wealth Structuring & International Protection',
+      tagline: 'Compliant financial roadmaps for international professionals, expatriates, and cross-border families.',
       challenges: [
-        'Navigating complex U.S. financial, tax, and insurance regulations.',
-        'Supporting extended family abroad while striving to build domestic U.S. wealth.',
-        'Lack of transparent, culturally fluent, licensed fiduciary advisory guidance.',
+        'Navigating multi-jurisdiction financial, tax, and insurance regulations.',
+        'Managing cross-border assets while maintaining domestic financial security.',
+        'Lack of transparent, globally fluent, licensed advisory guidance.',
       ],
       solutions: [
-        'Compliant U.S.-regulated financial products under Maryland and federal laws.',
-        'Dual-purpose cashflow planning: domestic asset growth + remitted family security.',
-        'Clear, plain-language education demystifying IRS account wrappers and insurers.',
+        'Compliant U.S. and international wealth structuring strategies.',
+        'Dual-purpose cashflow planning: domestic portfolio growth + global family protection.',
+        'Clear, plain-language education on cross-border tax efficiencies and asset preservation.',
       ],
       recommendedServices: [
         { name: 'Financial Needs Analysis', href: '/financial-needs-analysis' },
@@ -129,7 +129,7 @@ export default function WhoWeHelpPage() {
             <span className="section-eyebrow">CUSTOMIZED FINANCIAL ROADMAPS</span>
             <h2 className="section-title">Built for Your Life Stage &amp; Profession</h2>
             <p className="section-desc">
-              Whether you are raising a family, operating a business, or building wealth as a diaspora earner in the U.S., Nova Finance provides objective, licensed direction.
+              Whether you are raising a family, operating an enterprise, or building cross-border wealth as an international professional, Nova Finance provides objective, licensed direction.
             </p>
           </div>
 
@@ -222,8 +222,8 @@ export default function WhoWeHelpPage() {
             <div className="standard-item">
               <ShieldCheck size={28} className="s-icon" />
               <div>
-                <strong>Maryland Licensed Producer</strong>
-                <p>Authorized independent brokerage appointed with premier A-rated insurers.</p>
+                <strong>Licensed &amp; Fiduciary Standards</strong>
+                <p>Authorized independent advisory appointed with premier A-rated global institutions.</p>
               </div>
             </div>
             <div className="standard-item">

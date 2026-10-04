@@ -10,25 +10,25 @@ export default function CtaBanner() {
       <div className="container">
         <div className="cta-inner text-center">
           <h2 className="cta-heading">
-            Ready to take control of your financial <br className="hidden-mobile" />
-            future?
+            Curious where your financial blind spots are? <br className="hidden-mobile" />
+            Let&apos;s have a conversation.
           </h2>
 
           <p className="cta-subheading">
-            Start building financial stability with NOVA today.
+            No sales pitches, no get-rich hype. Just an objective, confidential discovery session tailored to your life.
           </p>
 
           {/* Oval Capsule with Contact Info */}
           <div className="contact-capsule">
             <a href="mailto:consult@tainaliel.com" className="capsule-block">
-              <span className="capsule-tag">Mail us!</span>
+              <span className="capsule-tag">Email our advisory team</span>
               <strong className="capsule-value">consult@tainaliel.com</strong>
             </a>
 
             <div className="capsule-divider" />
 
             <a href="tel:+14437136416" className="capsule-block">
-              <span className="capsule-tag">Call us!</span>
+              <span className="capsule-tag">Call our New York office</span>
               <strong className="capsule-value">+1 (443) 713-6416</strong>
             </a>
           </div>
@@ -39,7 +39,7 @@ export default function CtaBanner() {
               href="/book-a-consultation"
               className="btn-blue-solid cta-consult-btn"
             >
-              Book a Consultation
+              Schedule a Discovery Call
             </Link>
           </div>
 

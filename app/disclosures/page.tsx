@@ -38,8 +38,8 @@ export default function DisclosuresPage() {
               <h2>1. Legal Entity Name & Operating Model</h2>
               <p>
                 <strong>Legal Entity:</strong> NOVA Finance by Tainaliel LLC (operating under Tainaliel).<br />
-                <strong>Headquarters:</strong> 255 Oakview Village Dr, Glen Burnie, MD 21061, United States.<br />
-                <strong>Operating Model:</strong> NOVA Finance operates as a U.S.-based independent insurance brokerage and financial education firm. We provide tailored financial literacy, Financial Needs Analysis (FNA), and multi-carrier insurance solutions for individuals, working families, business owners, and diaspora professionals residing in the United States and authorized jurisdictions.
+                <strong>Headquarters:</strong> One World Trade Center, Suite 8500, New York, NY 10007, United States.<br />
+                <strong>Operating Model:</strong> NOVA Finance operates as a U.S.-based financial advisory consulting and multi-carrier insurance brokerage firm. We provide tailored strategic planning, asset protection, and financial education for individuals, families, and businesses across the United States.
               </p>
             </div>
 

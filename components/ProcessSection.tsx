@@ -146,19 +146,11 @@ export default function ProcessSection() {
             </div>
           </div>
         </div>
-
-        {/* Mouse Scroll Indicator */}
-        <div className="mouse-scroll-indicator light">
-          <div className="mouse-icon-frame">
-            <div className="mouse-wheel" />
-          </div>
-          <div className="mouse-arrow-down" />
-        </div>
       </div>
 
       <style jsx>{`
         .process-section {
-          padding: 85px 0 75px;
+          padding: 80px 0 80px;
           background-color: #003399;
           color: #ffffff;
           position: relative;

@@ -85,7 +85,7 @@ export default function AccessibilityPage() {
               <div className="contact-mini-card">
                 <p><strong>Phone:</strong> <a href="tel:+14437136416">+1 (443) 713-6416</a></p>
                 <p><strong>Email:</strong> <a href="mailto:consult@tainaliel.com">consult@tainaliel.com</a></p>
-                <p><strong>Address:</strong> Glen Burnie, Maryland, USA</p>
+                <p><strong>Address:</strong> One World Trade Center, Suite 8500, New York, NY 10007, USA</p>
                 <p>We aim to respond to accessibility inquiries within 1 business day.</p>
               </div>
             </div>

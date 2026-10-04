@@ -3,17 +3,17 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShieldCheck, Clock, Award, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Clock, Award, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
     <>
       <section className="hero-banner">
-        {/* Background Image */}
+        {/* Background Image with Dark Professional Overlay */}
         <div className="hero-bg-container">
           <Image
-            src="/images/banner-4-1.jpg"
-            alt="Nova Finance - Grow Your Wealth With Smart Investments"
+            src="/images/nova-hero-skyline.jpg"
+            alt="Nova Finance One World Trade Center New York"
             fill
             priority
             className="hero-bg-img"
@@ -25,38 +25,34 @@ export default function Hero() {
         <div className="container hero-content-container">
           <div className="hero-inner-box">
             <div className="hero-eyebrow-tag">
-              <ShieldCheck size={16} />
-              <span>LICENSED FINANCIAL ADVISORY &amp; PROTECTION</span>
+              <ShieldCheck size={16} className="eyebrow-icon" />
+              <span>CURIOSITY &amp; STRATEGIC CLARITY</span>
             </div>
 
             <h1 className="hero-main-title">
-              Build a Financial Plan That Protects Your Family &amp; Grows With Your Goals
+              What is your financial strategy overlooking?
             </h1>
 
             <p className="hero-subtext">
-              Nova Finance helps working families, professionals, and diaspora entrepreneurs in Maryland and authorized U.S. jurisdictions evaluate life insurance, savings, and long-term investment options through a clear, licensed, one-on-one process.
+              Finance isn&apos;t about chasing hype or unrealistic promises. We help you ask the right questions, uncover hidden blind spots, and design clear safeguards for your life and business.
             </p>
 
             <div className="hero-actions">
               <Link
-                href="/financial-needs-analysis"
-                className="btn-primary-hero"
+                href="/book-a-consultation"
+                className="btn-pill-primary"
               >
-                <span>Get My Free Financial Snapshot</span>
-                <CheckCircle2 size={18} />
+                <span>Explore Your Blind Spots</span>
+                <ArrowRight size={18} />
               </Link>
 
               <Link
                 href="/our-process"
-                className="btn-secondary-hero"
+                className="btn-pill-secondary"
               >
-                <span>See How the Process Works</span>
+                <span>How We Uncover Answers</span>
               </Link>
             </div>
-
-            <p className="hero-disclaimer-footnote">
-              *Licensed in the State of Maryland and authorized U.S. jurisdictions. Product availability, carrier appointments, and eligibility vary by state.
-            </p>
           </div>
         </div>
       </section>
@@ -67,19 +63,19 @@ export default function Hero() {
           <div className="trust-grid">
             <div className="trust-item">
               <CheckCircle2 size={18} className="trust-icon" />
-              <span>Licensed in MD &amp; U.S. Jurisdictions</span>
-            </div>
-            <div className="trust-item">
-              <Award size={18} className="trust-icon" />
-              <span>100% Free &amp; Confidential FNA Snapshot</span>
+              <span>Questions Over Sales Pitches</span>
             </div>
             <div className="trust-item">
               <ShieldCheck size={18} className="trust-icon" />
-              <span>Independent Multi-Carrier Brokerage</span>
+              <span>No Hype or Inflated Promises</span>
+            </div>
+            <div className="trust-item">
+              <Award size={18} className="trust-icon" />
+              <span>Objective Scenario Testing</span>
             </div>
             <div className="trust-item">
               <Clock size={18} className="trust-icon" />
-              <span>Guaranteed Response Within 1 Business Day</span>
+              <span>Clarity for Real Life</span>
             </div>
           </div>
         </div>
@@ -92,8 +88,9 @@ export default function Hero() {
           display: flex;
           align-items: center;
           overflow: hidden;
-          background-color: #000000;
-          padding: 120px 0 110px;
+          background-color: #000022;
+          padding: 120px 0 105px;
+          color: #ffffff;
         }
 
         .hero-bg-container {
@@ -104,13 +101,18 @@ export default function Hero() {
 
         :global(.hero-bg-img) {
           object-fit: cover;
-          object-position: center;
+          object-position: center 30%;
         }
 
         .hero-dark-overlay {
           position: absolute;
           inset: 0;
-          background-color: rgba(0, 0, 0, 0.65);
+          background: linear-gradient(
+            90deg,
+            rgba(3, 10, 24, 0.88) 0%,
+            rgba(3, 10, 24, 0.72) 60%,
+            rgba(3, 10, 24, 0.55) 100%
+          );
         }
 
         .hero-content-container {
@@ -119,7 +121,7 @@ export default function Hero() {
         }
 
         .hero-inner-box {
-          max-width: 880px;
+          max-width: 860px;
           text-align: left;
         }
 
@@ -127,108 +129,105 @@ export default function Hero() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background-color: rgba(0, 194, 203, 0.15);
-          border: 1px solid #00c2cb;
+          background-color: rgba(0, 194, 203, 0.16);
+          border: 1px solid rgba(0, 194, 203, 0.45);
           color: #00c2cb;
-          padding: 6px 14px;
+          padding: 7px 16px;
           border-radius: 9999px;
           font-size: 0.8rem;
           font-weight: 800;
           letter-spacing: 1.5px;
-          margin-bottom: 20px;
+          margin-bottom: 22px;
+          text-transform: uppercase;
+          backdrop-filter: blur(4px);
+        }
+
+        :global(.eyebrow-icon) {
+          color: #00c2cb;
         }
 
         .hero-main-title {
-          font-size: 3.25rem;
+          font-size: 3.35rem;
           font-weight: 800;
           line-height: 1.2;
           letter-spacing: -0.5px;
           color: #ffffff;
-          margin-bottom: 20px;
+          margin-bottom: 22px;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
         }
 
         .hero-subtext {
           font-size: 1.15rem;
-          line-height: 1.7;
+          line-height: 1.75;
           color: #f1f5f9;
-          margin-bottom: 32px;
-          max-width: 820px;
+          margin-bottom: 36px;
+          max-width: 760px;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         }
 
         .hero-actions {
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: 18px;
           flex-wrap: wrap;
-          margin-bottom: 22px;
         }
 
-        .btn-primary-hero {
+        .btn-hero-primary {
           display: inline-flex !important;
           align-items: center !important;
           justify-content: center !important;
           gap: 10px;
-          background-color: #003399 !important;
-          color: #ffffff !important;
-          font-size: 1.02rem !important;
-          font-weight: 700 !important;
-          padding: 14px 28px !important;
-          border-radius: 10px !important;
-          border: 2px solid #ffffff !important;
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-          text-decoration: none !important;
-          cursor: pointer !important;
-          box-shadow: 0 8px 24px rgba(0, 51, 153, 0.35);
-        }
-
-        .btn-primary-hero:hover {
           background-color: #00c2cb !important;
           color: #000050 !important;
-          border-color: #00c2cb !important;
-          transform: translateY(-3px) !important;
-          box-shadow: 0 12px 28px rgba(0, 194, 203, 0.45) !important;
+          font-size: 1.02rem !important;
+          font-weight: 800 !important;
+          padding: 15px 32px !important;
+          border-radius: 9999px !important;
+          text-decoration: none !important;
+          transition: all 0.25s ease !important;
+          box-shadow: 0 6px 22px rgba(0, 194, 203, 0.45) !important;
+          cursor: pointer !important;
+          border: none !important;
         }
 
-        .btn-secondary-hero {
+        .btn-hero-primary:hover {
+          background-color: #ffffff !important;
+          color: #000050 !important;
+          transform: translateY(-3px) !important;
+          box-shadow: 0 10px 28px rgba(255, 255, 255, 0.35) !important;
+        }
+
+        .btn-hero-secondary {
           display: inline-flex !important;
           align-items: center !important;
           justify-content: center !important;
           gap: 8px;
-          background-color: rgba(255, 255, 255, 0.1) !important;
+          background-color: rgba(255, 255, 255, 0.12) !important;
           color: #ffffff !important;
           font-size: 1.02rem !important;
           font-weight: 600 !important;
-          padding: 14px 28px !important;
-          border-radius: 10px !important;
-          border: 2px solid #ffffff !important;
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          padding: 15px 30px !important;
+          border-radius: 9999px !important;
+          border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
           text-decoration: none !important;
+          transition: all 0.25s ease !important;
           cursor: pointer !important;
-          backdrop-filter: blur(4px);
+          backdrop-filter: blur(6px);
         }
 
-        .btn-secondary-hero:hover {
-          background-color: #ffffff !important;
+        .btn-hero-secondary:hover {
+          background-color: rgba(255, 255, 255, 0.25) !important;
           border-color: #ffffff !important;
-          color: #000050 !important;
+          color: #ffffff !important;
           transform: translateY(-3px) !important;
-          box-shadow: 0 12px 28px rgba(255, 255, 255, 0.3) !important;
-        }
-
-        .hero-disclaimer-footnote {
-          font-size: 0.82rem;
-          color: #cbd5e1;
-          font-style: italic;
-          margin: 0;
-          opacity: 0.9;
         }
 
         /* Trust Strip */
         .trust-strip-section {
-          background-color: #000050;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-          padding: 20px 0;
+          background-color: #00003c;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 22px 0;
           color: #ffffff;
         }
 
@@ -243,12 +242,12 @@ export default function Hero() {
           display: flex;
           align-items: center;
           gap: 10px;
-          font-size: 0.88rem;
+          font-size: 0.9rem;
           font-weight: 600;
           color: #cbd5e1;
         }
 
-        .trust-icon {
+        :global(.trust-icon) {
           color: #00c2cb;
           flex-shrink: 0;
         }
@@ -263,7 +262,7 @@ export default function Hero() {
         @media (max-width: 991px) {
           .hero-banner {
             min-height: auto;
-            padding: 80px 0 80px;
+            padding: 85px 0 75px;
           }
           .hero-main-title {
             font-size: 2.6rem;
@@ -281,7 +280,8 @@ export default function Hero() {
             flex-direction: column;
             align-items: stretch;
           }
-          .btn-primary-hero {
+          .btn-hero-primary,
+          .btn-hero-secondary {
             justify-content: center;
           }
           .trust-grid {

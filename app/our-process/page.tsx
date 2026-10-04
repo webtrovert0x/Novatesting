@@ -90,13 +90,13 @@ export default function OurProcessPage() {
                 height={18}
                 className="sub-badge-img"
               />
-              <span>THE NOVA METHODOLOGY</span>
+              <span>THE NOVA APPROACH</span>
             </div>
             <h2 className="section-heading">
-              A Structured, Disciplined Path to Sustainable Wealth
+              A Thoughtful, Structured Approach to Financial Discovery
             </h2>
             <p className="lead-text">
-              Building enduring financial independence is never an accident—it is the result of clear planning, informed execution, and continuous alignment. Here is how we turn your aspirations into tangible reality.
+              Enduring financial stability isn&apos;t about guesswork or speculative excitement—it comes from asking the right questions, stress-testing vulnerabilities, and aligning every piece of your financial picture with clarity.
             </p>
           </div>
         </div>
@@ -164,8 +164,8 @@ export default function OurProcessPage() {
               Schedule your confidential 1-on-1 discovery consultation today and take the first decisive step toward financial clarity.
             </p>
             <Link
-              href="/contact-us"
-              className="btn-white-solid cta-btn"
+              href="/book-a-consultation"
+              className="btn-pill-primary"
             >
               <span>Book Your Consultation</span>
               <ArrowRight size={18} />

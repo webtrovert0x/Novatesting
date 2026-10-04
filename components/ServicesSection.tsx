@@ -8,22 +8,22 @@ import { ArrowRight } from 'lucide-react';
 export default function ServicesSection() {
   const services = [
     {
-      title: 'Tax-Advantaged Mutual Funds',
-      desc: 'Build a personalized, diversified savings and mutual funds portfolio aligned with your time horizon, risk tolerance, and long-term financial goals.',
+      title: 'Strategic Wealth Planning',
+      desc: 'Clarify your path forward with structured roadmaps designed around cash flow, tax efficiencies, and long-term milestones.',
       icon: '/images/icons8-investment-50.png',
-      link: '/tax-free-investment',
+      link: '/services',
     },
     {
-      title: 'Term Life Insurance Protection',
-      desc: 'Accessible, affordable, and transparent term life insurance designed to protect your family financially and replace income if anything happens to you.',
+      title: 'Family & Asset Protection',
+      desc: 'Evaluate whether your household coverage matches real-world liabilities, income replacement needs, and lifestyle protection.',
       icon: '/images/icons8-family-50.png',
-      link: '/term-life-insurance',
+      link: '/services',
     },
     {
-      title: 'Financial Needs Analysis (FNA)',
-      desc: 'A comprehensive, complimentary financial roadmap that aligns your cash flow, debt acceleration, retirement goals, and emergency safety nets.',
+      title: 'Business & Executive Solutions',
+      desc: 'Stress-test key continuity safeguards, commercial liabilities, and executive risk management for your venture.',
       icon: '/images/icons8-chart-50.png',
-      link: '/financial-needs-analysis',
+      link: '/services',
     },
   ];
 
@@ -32,10 +32,10 @@ export default function ServicesSection() {
       <div className="container">
         {/* Section Header */}
         <div className="services-header text-center">
-          <span className="section-eyebrow">CORE PRACTICE AREAS</span>
-          <h2 className="services-title">What We Offer</h2>
+          <span className="section-eyebrow">AREAS OF ADVISORY</span>
+          <h2 className="services-title">Consultative Roadmaps for Life &amp; Business</h2>
           <p className="services-subtitle">
-            Strategic financial guidance and multi-carrier insurance solutions tailored for your life stage.
+            We don&apos;t push standardized packages. We explore your unique financial landscape, evaluate risk exposures, and design tailored frameworks that make sense for you.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export default function ServicesSection() {
                   href={item.link}
                   className="offer-pill-btn"
                 >
-                  <span>Explore Service</span>
+                  <span>Learn How It Works</span>
                   <ArrowRight size={16} />
                 </Link>
               </div>
@@ -72,8 +72,9 @@ export default function ServicesSection() {
 
         {/* Center See All Our Services Button */}
         <div className="see-all-wrap text-center">
-          <Link href="/services" className="btn-blue-solid see-all-btn">
-            View All Services &amp; Coverage Options
+          <Link href="/services" className="btn-pill-blue">
+            <span>Explore All Practice Areas &amp; Options</span>
+            <ArrowRight size={16} />
           </Link>
         </div>
       </div>

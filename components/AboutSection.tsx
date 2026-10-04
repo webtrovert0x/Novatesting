@@ -7,12 +7,12 @@ import { TrendingUp, Play } from 'lucide-react';
 
 export default function AboutSection() {
   const coreServices = [
-    { title: 'Tax Free Mutual Funds Investment', href: '/tax-free-investment' },
-    { title: 'Life Insurance', href: '/term-life-insurance' },
-    { title: 'Financial Needs Analysis', href: '/financial-needs-analysis' },
-    { title: 'Auto Insurance', href: '/automobile-insurance' },
-    { title: 'Health Insurance', href: '/health-insurance' },
-    { title: 'Property & Casualty', href: '/property-insurance' },
+    { title: 'Tax-Advantaged Investment Discovery', href: '/tax-free-investment' },
+    { title: 'Income & Family Protection Planning', href: '/term-life-insurance' },
+    { title: 'Financial Needs Analysis (FNA)', href: '/financial-needs-analysis' },
+    { title: 'Auto & Liability Comparison', href: '/automobile-insurance' },
+    { title: 'Health & Medical Coverage Review', href: '/health-insurance' },
+    { title: 'Property & Casualty Safeguards', href: '/property-insurance' },
   ];
 
   return (
@@ -24,7 +24,7 @@ export default function AboutSection() {
             <div className="about-img-frame">
               <Image
                 src="/images/offer-1-1.jpg"
-                alt="Nova Finance Financial Strategy"
+                alt="Nova Finance Strategic Advisory"
                 width={520}
                 height={480}
                 className="about-feature-img"
@@ -39,16 +39,16 @@ export default function AboutSection() {
               <span>ABOUT NOVA FINANCE</span>
             </div>
 
-            <h2 className="about-main-heading">Smart Investments</h2>
+            <h2 className="about-main-heading">Objective Clarity for Real Life</h2>
 
             <p className="about-description">
               NOVA Finance is the financial consulting and wealth protection arm of{' '}
-              <strong>Tainaliel</strong>, headquartered in Glen Burnie, Maryland. We are dedicated to helping working families, entrepreneurs, and diaspora professionals build long-term financial stability and generational wealth through transparent, multi-carrier insurance solutions and disciplined wealth education.
+              <strong>Tainaliel</strong>, headquartered at One World Trade Center, New York, NY. We help individuals, families, and business leaders look past sales hype, uncover hidden risks, and build clear, resilient strategies tailored to what truly matters.
             </p>
 
             {/* Core Services Card Box */}
             <div className="core-services-box">
-              <h3 className="core-services-title">Our Core Services</h3>
+              <h3 className="core-services-title">Areas of Strategic Exploration</h3>
               <ul className="core-services-list">
                 {coreServices.map((service, idx) => (
                   <li key={idx}>
@@ -63,24 +63,16 @@ export default function AboutSection() {
 
             <div className="about-btn-wrap">
               <Link href="/about-company" className="btn-blue-solid">
-                More About Us
+                Explore Our Philosophy
               </Link>
             </div>
           </div>
-        </div>
-
-        {/* Mouse Scroll Indicator */}
-        <div className="mouse-scroll-indicator">
-          <div className="mouse-icon-frame">
-            <div className="mouse-wheel" />
-          </div>
-          <div className="mouse-arrow-down" />
         </div>
       </div>
 
       <style jsx>{`
         .about-section {
-          padding: 90px 0 60px;
+          padding: 80px 0 80px;
           background-color: #ffffff;
         }
 

@@ -25,12 +25,9 @@ export default function Header() {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Start Here', href: '/start-here' },
+    { name: 'About Us', href: '/about-company' },
     { name: 'Services', href: '/services' },
-    { name: 'Who We Help', href: '/who-we-help' },
-    { name: 'Resources', href: '/resources' },
-    { name: 'Case Studies', href: '/case-studies' },
-    { name: 'About', href: '/about-company' },
+    { name: 'Our Process', href: '/our-process' },
     { name: 'Contact', href: '/contact-us' },
   ];
 
@@ -77,33 +74,26 @@ export default function Header() {
           <div className="header-right">
             <Link
               href="/book-a-consultation"
-              className="consultation-widget-btn"
+              className="btn-header-cta"
               style={{
                 display: 'inline-flex',
-                flexDirection: 'row',
                 alignItems: 'center',
-                gap: '12px',
+                gap: '8px',
+                backgroundColor: '#003399',
+                color: '#ffffff',
+                fontSize: '0.95rem',
+                fontWeight: '700',
+                padding: '11px 24px',
+                borderRadius: '9999px',
+                border: '1.5px solid #003399',
+                boxShadow: '0 4px 14px rgba(0, 51, 153, 0.3)',
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
+                cursor: 'pointer',
               }}
             >
-              <div className="gauge-icon-circle">
-                <Gauge size={20} className="gauge-icon" />
-              </div>
-              <div
-                className="consultation-label"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  textAlign: 'left',
-                  lineHeight: 1.25,
-                }}
-              >
-                <span className="label-top">BOOK A</span>
-                <span className="label-bottom">
-                  CONSULTATION <ArrowRight size={14} className="consult-arrow" />
-                </span>
-              </div>
+              <span>Start with clarity</span>
+              <ArrowRight size={15} />
             </Link>
 
             {/* Mobile Hamburger Toggle */}
@@ -163,7 +153,7 @@ export default function Header() {
           <ul className="contact-list">
             <li>
               <MapPin size={16} />
-              <span>Glen Burnie, Maryland, USA</span>
+              <span>One World Trade Center, New York, NY, USA</span>
             </li>
             <li>
               <Phone size={16} />
@@ -252,65 +242,25 @@ export default function Header() {
           flex-shrink: 0;
         }
 
-        .consultation-widget-btn {
-          display: inline-flex !important;
-          flex-direction: row !important;
-          align-items: center !important;
-          gap: 12px !important;
-          text-decoration: none;
-          color: #0a1128;
-          white-space: nowrap;
-          cursor: pointer;
-        }
-
-        .gauge-icon-circle {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background-color: #112822;
-          color: #ffffff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          transition: transform 0.25s ease;
-        }
-
-        .consultation-widget-btn:hover .gauge-icon-circle {
-          transform: rotate(20deg);
-        }
-
-        .consultation-label {
-          display: flex;
-          flex-direction: column;
-          line-height: 1.25;
-          text-align: left;
-        }
-
-        .label-top {
-          font-size: 0.72rem;
-          font-weight: 800;
-          letter-spacing: 0.5px;
-          color: #0a1128;
-        }
-
-        .label-bottom {
-          font-size: 0.88rem;
-          font-weight: 800;
-          letter-spacing: 0.5px;
-          color: #0a1128;
+        .btn-header-cta {
           display: inline-flex;
           align-items: center;
-          gap: 4px;
+          gap: 8px;
+          background-color: #003399;
+          color: #ffffff;
+          font-size: 0.92rem;
+          font-weight: 700;
+          padding: 10px 22px;
+          border-radius: 9999px;
+          text-decoration: none;
+          transition: all 0.25s ease;
+          box-shadow: 0 4px 14px rgba(0, 51, 153, 0.25);
         }
 
-        .consult-arrow {
-          color: #003399;
-          transition: transform 0.2s ease;
-        }
-
-        .consultation-widget-btn:hover .consult-arrow {
-          transform: translateX(4px);
+        .btn-header-cta:hover {
+          background-color: #002277;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 18px rgba(0, 51, 153, 0.35);
         }
 
         .mobile-toggle {

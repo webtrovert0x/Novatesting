@@ -10,7 +10,7 @@ import { getWordPressPosts, WPPost } from '@/lib/wordpress';
 const DEFAULT_POSTS = [
   {
     title: 'Term Life Insurance for Parents: How Much Do You Need?',
-    author: 'Olamide Abayomi',
+    author: 'Nova Finance Advisory Team',
     date: 'September 26, 2026',
     comments: '0 Comments',
     excerpt:
@@ -20,7 +20,7 @@ const DEFAULT_POSTS = [
   },
   {
     title: 'Financial Needs Analysis Checklist: 7 Steps for Families',
-    author: 'Olamide Abayomi',
+    author: 'Nova Finance Advisory Team',
     date: 'September 26, 2026',
     comments: '0 Comments',
     excerpt:
@@ -41,7 +41,7 @@ export default function BlogPage() {
         if (wpData && wpData.length > 0) {
           const formatted = wpData.map((p) => ({
             title: p.title.rendered.replace(/<[^>]+>/g, ''),
-            author: p.author_name || 'Olamide Abayomi',
+            author: p.author_name || 'Nova Finance Advisory Team',
             date: p.date,
             comments: '0 Comments',
             excerpt: p.excerpt.rendered.replace(/<[^>]+>/g, '').slice(0, 240) + '...',
@@ -140,11 +140,11 @@ export default function BlogPage() {
                 </Link>
               </div>
 
-              {/* Author / Principal Bio Widget */}
+              {/* Author / Editorial Widget */}
               <div className="sidebar-widget author-widget">
-                <h4 className="author-heading">About the Author &amp; Reviewer</h4>
+                <h4 className="author-heading">About Nova Finance Advisory</h4>
                 <p className="author-p">
-                  <strong>Olamide Abayomi (Tainaliel)</strong> is the Managing Principal of NOVA Finance by Tainaliel LLC. He is an independent insurance producer licensed in the State of Maryland, specializing in multi-carrier family protection and retirement compound modeling.
+                  Our insights and educational guides are authored and reviewed by licensed independent advisors specializing in multi-carrier family protection, asset preservation, and strategic financial planning.
                 </p>
                 <Link href="/about-company" className="author-link">
                   Learn About Our Advisory Philosophy ➔

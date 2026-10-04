@@ -37,7 +37,7 @@ export default function FinancialNeedsAnalysisChecklistArticle() {
               <div className="article-meta">
                 <span className="meta-item">
                   <User size={15} />
-                  <span>Olamide Abayomi</span>
+                  <span>Nova Finance Advisory Team</span>
                 </span>
                 <span className="meta-item">
                   <Calendar size={15} />
