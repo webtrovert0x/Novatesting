@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+  --primary-blue: #003399;
+  --primary-blue-hover: #002277;
+  --primary-dark-navy: #000050;
+  --accent-cyan: #00c2cb;
+  --text-dark: #09122a;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --bg-light: #f8fafc;
+  --bg-card: #f1f5f9;
+  --border-blue: #003399;
+  --border-light: #e2e8f0;
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-body);
+  background-color: #ffffff;
+  line-height: 1.68;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-dark);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+}
+
+h1 {
+  letter-spacing: -0.035em;
+  font-weight: 800;
+}
+
+h2 {
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+h3 {
+  letter-spacing: -0.022em;
+  font-weight: 700;
+}
+
+p {
+  letter-spacing: -0.011em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container-fluid {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* Mouse Scroll Indicator */
+.mouse-scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 40px auto 0;
+  opacity: 0.85;
+}
+
+.mouse-icon-frame {
+  width: 22px;
+  height: 36px;
+  border: 2px solid #0a1128;
+  border-radius: 14px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.mouse-wheel {
+  width: 3px;
+  height: 7px;
+  background-color: #0a1128;
+  border-radius: 2px;
+  animation: wheelScroll 1.5s infinite;
+}
+
+.mouse-arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #0a1128;
+  animation: arrowBounce 1.5s infinite;
+}
+
+.mouse-scroll-indicator.light .mouse-icon-frame {
+  border-color: #ffffff;
+}
+.mouse-scroll-indicator.light .mouse-wheel {
+  background-color: #ffffff;
+}
+.mouse-scroll-indicator.light .mouse-arrow-down {
+  border-top-color: #ffffff;
+}
+
+@keyframes wheelScroll {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(6px); opacity: 0.3; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* Distinct, High-Contrast Global Button System */
+.btn-pill-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  background-color: #00c2cb !important;
+  color: #000050 !important;
+  font-family: var(--font-heading) !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  padding: 16px 36px !important;
+  border-radius: 9999px !important;
+  border: 2px solid #00c2cb !important;
+  box-shadow: 0 8px 24px rgba(0, 194, 203, 0.45) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  white-space: nowrap !important;
+}
+
+.btn-pill-primary:hover {
+  background-color: #ffffff !important;
+  color: #000050 !important;
+  border-color: #ffffff !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.4) !important;
+}
+
+.btn-pill-secondary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background-color: #ffffff !important;
+  color: #000050 !important;
+  font-family: var(--font-heading) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  padding: 16px 36px !important;
+  border-radius: 9999px !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  white-space: nowrap !important;
+}
+
+.btn-pill-secondary:hover {
+  background-color: #00c2cb !important;
+  color: #000050 !important;
+  border-color: #00c2cb !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 30px rgba(0, 194, 203, 0.45) !important;
+}
+
+.btn-pill-blue {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  background-color: #003399 !important;
+  color: #ffffff !important;
+  font-family: var(--font-heading) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  padding: 16px 36px !important;
+  border-radius: 9999px !important;
+  border: 2px solid #003399 !important;
+  box-shadow: 0 8px 24px rgba(0, 51, 153, 0.35) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  white-space: nowrap !important;
+}
+
+.btn-pill-blue:hover {
+  background-color: #002277 !important;
+  border-color: #002277 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 30px rgba(0, 51, 153, 0.5) !important;
+}
+
+.btn-header-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background-color: #003399 !important;
+  color: #ffffff !important;
+  font-family: var(--font-heading) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  padding: 12px 26px !important;
+  border-radius: 9999px !important;
+  border: 1.5px solid #003399 !important;
+  box-shadow: 0 4px 14px rgba(0, 51, 153, 0.3) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  white-space: nowrap !important;
+}
+
+.btn-header-cta:hover {
+  background-color: #002277 !important;
+  color: #ffffff !important;
+  border-color: #002277 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(0, 51, 153, 0.45) !important;
+}
+
+/* Standard Buttons */
+.btn-blue-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 13px 28px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.btn-blue-solid:hover {
+  background-color: var(--primary-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 51, 153, 0.25);
+}
+
+/* Floating back to top button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #003399;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 80, 0.3);
+  z-index: 99;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.back-to-top-btn:hover {
+  background: #002277;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  .container-fluid {
+    padding: 0 16px;
+  }
+}
+
