@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
 import { getAllPosts, createPost, deletePost } from '@/lib/posts';
 
+function isAuthorized(request: Request): boolean {
+  const expectedPassword = process.env.ADMIN_PASSWORD || 'nova2026';
+  const clientKey = request.headers.get('x-admin-key');
+  return clientKey === expectedPassword;
+}
+
 export async function GET() {
   try {
     const posts = await getAllPosts();
@@ -17,15 +23,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    // If you set ADMIN_SECRET_KEY in Vercel environment variables, it will enforce authorization
-    if (process.env.ADMIN_SECRET_KEY) {
-      const authHeader = request.headers.get('x-admin-key');
-      if (authHeader !== process.env.ADMIN_SECRET_KEY) {
-        return NextResponse.json(
-          { success: false, message: 'Unauthorized. Invalid admin secret.' },
-          { status: 401 }
-        );
-      }
+    if (!isAuthorized(request)) {
+      return NextResponse.json(
+        { success: false, message: 'Unauthorized. Invalid admin password.' },
+        { status: 401 }
+      );
     }
 
     const body = await request.json();
@@ -97,14 +99,11 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    if (process.env.ADMIN_SECRET_KEY) {
-      const authHeader = request.headers.get('x-admin-key');
-      if (authHeader !== process.env.ADMIN_SECRET_KEY) {
-        return NextResponse.json(
-          { success: false, message: 'Unauthorized. Invalid admin secret.' },
-          { status: 401 }
-        );
-      }
+    if (!isAuthorized(request)) {
+      return NextResponse.json(
+        { success: false, message: 'Unauthorized. Invalid admin password.' },
+        { status: 401 }
+      );
     }
 
     const { searchParams } = new URL(request.url);

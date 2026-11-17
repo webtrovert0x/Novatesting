@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
+  Lock,
   PlusCircle,
   FileText,
   Eye,
@@ -13,10 +14,16 @@ import {
   ArrowRight,
   ExternalLink,
   RefreshCw,
+  LogOut,
 } from 'lucide-react';
 import { Post } from '@/lib/posts';
 
 export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [inputPassword, setInputPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
+
   const [activeTab, setActiveTab] = useState<'write' | 'list'>('write');
 
   // Posts list
@@ -46,9 +53,67 @@ export default function AdminPage() {
   const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // Check saved session on mount
   useEffect(() => {
-    fetchPosts();
+    const saved = sessionStorage.getItem('nova_admin_auth');
+    if (saved) {
+      // Verify stored password
+      fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: saved }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            setIsAuthenticated(true);
+            fetchPosts();
+          } else {
+            sessionStorage.removeItem('nova_admin_auth');
+            setIsAuthenticated(false);
+          }
+        })
+        .catch(() => {
+          setIsAuthenticated(false);
+        });
+    } else {
+      setIsAuthenticated(false);
+    }
   }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthLoading(true);
+    setAuthError('');
+
+    try {
+      const res = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: inputPassword }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        sessionStorage.setItem('nova_admin_auth', inputPassword);
+        setIsAuthenticated(true);
+        fetchPosts();
+      } else {
+        setAuthError(data.message || 'Incorrect password.');
+      }
+    } catch {
+      setAuthError('Error communicating with authentication server.');
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('nova_admin_auth');
+    setIsAuthenticated(false);
+    setInputPassword('');
+  };
 
   const fetchPosts = async (): Promise<boolean> => {
     setLoadingPosts(true);
@@ -70,9 +135,14 @@ export default function AdminPage() {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this article?')) return;
     setDeleteId(id);
+    const key = sessionStorage.getItem('nova_admin_auth') || '';
+
     try {
       const res = await fetch(`/api/admin/posts?id=${id}`, {
         method: 'DELETE',
+        headers: {
+          'x-admin-key': key,
+        },
       });
       const data = await res.json();
       if (data.success) {
@@ -93,11 +163,14 @@ export default function AdminPage() {
     setSubmitSuccess(null);
     setSubmitError(null);
 
+    const key = sessionStorage.getItem('nova_admin_auth') || '';
+
     try {
       const res = await fetch('/api/admin/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-admin-key': key,
         },
         body: JSON.stringify({
           title,
@@ -157,6 +230,176 @@ export default function AdminPage() {
     },
   ];
 
+  // Loading state while checking session
+  if (isAuthenticated === null) {
+    return (
+      <div className="login-screen">
+        <div className="loading-spinner">Verifying session...</div>
+        <style jsx>{`
+          .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #000050 0%, #003399 100%);
+            color: #ffffff;
+            font-size: 1.1rem;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  // UI PASSWORD FORM
+  if (!isAuthenticated) {
+    return (
+      <div className="login-screen">
+        <div className="login-card">
+          <div className="login-logo text-center">
+            <Image
+              src="/images/Nova-Finance-Logo1.png"
+              alt="Nova Finance"
+              width={160}
+              height={80}
+              priority
+              style={{ width: 'auto', height: 'auto', maxHeight: '75px' }}
+            />
+          </div>
+
+          <h2 className="login-title">Admin Publishing Desk</h2>
+          <p className="login-subtitle">
+            Enter your administrator password to manage and publish articles.
+          </p>
+
+          <form onSubmit={handleLogin} className="login-form">
+            <div className="form-group">
+              <label>Password</label>
+              <div className="input-with-icon">
+                <Lock size={18} className="field-icon" />
+                <input
+                  type="password"
+                  placeholder="Enter administrator password..."
+                  value={inputPassword}
+                  onChange={(e) => setInputPassword(e.target.value)}
+                  className="auth-input"
+                  autoFocus
+                  required
+                />
+              </div>
+            </div>
+
+            {authError && <div className="error-badge">{authError}</div>}
+
+            <button type="submit" disabled={authLoading} className="login-btn">
+              {authLoading ? 'Verifying...' : 'Sign In to Admin'} <ArrowRight size={16} />
+            </button>
+          </form>
+        </div>
+
+        <style jsx>{`
+          .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #000050 0%, #003399 100%);
+            padding: 20px;
+          }
+          .login-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 45px 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 20px 45px rgba(0, 0, 80, 0.35);
+            text-align: center;
+          }
+          .login-logo {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+          }
+          .login-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0a1128;
+            margin-bottom: 8px;
+          }
+          .login-subtitle {
+            font-size: 0.92rem;
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.5;
+          }
+          .login-form {
+            text-align: left;
+          }
+          .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 8px;
+          }
+          .input-with-icon {
+            position: relative;
+          }
+          .field-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+          }
+          .auth-input {
+            width: 100%;
+            padding: 12px 14px 12px 42px;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          }
+          .auth-input:focus {
+            border-color: #003399;
+            box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.12);
+          }
+          .error-badge {
+            margin-top: 10px;
+            color: #dc2626;
+            font-size: 0.85rem;
+            font-weight: 600;
+          }
+          .login-btn {
+            width: 100%;
+            margin-top: 20px;
+            background-color: #003399;
+            color: #ffffff;
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+          }
+          .login-btn:hover {
+            background-color: #002277;
+          }
+          .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  // AUTHENTICATED DASHBOARD
   return (
     <div className="admin-container">
       {/* Top Navbar */}
@@ -169,6 +412,7 @@ export default function AdminPage() {
                 alt="Nova Finance"
                 width={130}
                 height={65}
+                style={{ width: 'auto', height: 'auto', maxHeight: '45px' }}
               />
             </Link>
             <span className="admin-badge">Publishing Desk</span>
@@ -178,6 +422,9 @@ export default function AdminPage() {
             <Link href="/blog" target="_blank" className="btn-view-live">
               View Live Blog <ExternalLink size={14} />
             </Link>
+            <button onClick={handleLogout} className="btn-logout" title="Log out">
+              <LogOut size={15} /> Logout
+            </button>
           </div>
         </div>
       </header>
@@ -599,6 +846,23 @@ export default function AdminPage() {
         }
         .btn-view-live:hover {
           background-color: #002277;
+        }
+        .btn-logout {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: transparent;
+          border: 1px solid #475569;
+          color: #cbd5e1;
+          padding: 6px 14px;
+          border-radius: 9999px;
+          font-size: 0.82rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .btn-logout:hover {
+          background: #475569;
+          color: #ffffff;
         }
 
         /* Main Content */
