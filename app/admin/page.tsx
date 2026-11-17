@@ -204,6 +204,13 @@ export default function AdminPage() {
 
       if (data.success) {
         setSubmitSuccess(`Published successfully! Slug: /blog/${data.post.slug}`);
+        try {
+          const existing = JSON.parse(localStorage.getItem('nova_client_posts') || '[]');
+          const filtered = existing.filter((p: { slug: string }) => p.slug !== data.post.slug);
+          localStorage.setItem('nova_client_posts', JSON.stringify([data.post, ...filtered]));
+        } catch {
+          // ignore
+        }
         fetchPosts();
         setTitle('');
         setSlug('');

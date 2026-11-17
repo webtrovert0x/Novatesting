@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import defaultPosts from '@/data/posts.json';
 
 export interface Author {
@@ -39,24 +40,56 @@ interface WordPressPostRaw {
 let runtimePosts: Post[] = [...(defaultPosts as Post[])];
 
 /**
- * Load raw posts
+ * Load raw posts from /tmp/nova_posts.json or fallback to data/posts.json
  */
-function loadLocalPosts(): Post[] {
+export function loadLocalPosts(): Post[] {
+  if (typeof window === 'undefined') {
+    try {
+      const fs = require('fs');
+      const tmpPath = '/tmp/nova_posts.json';
+      if (fs.existsSync(tmpPath)) {
+        const data = fs.readFileSync(tmpPath, 'utf-8');
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          runtimePosts = parsed;
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('[Posts Loader] Notice reading /tmp/nova_posts.json:', e);
+    }
+  }
+
   return runtimePosts;
 }
 
 /**
- * Save posts to data/posts.json (if in Node environment) and in-memory cache
+ * Save posts to /tmp/nova_posts.json (writable on Vercel/serverless) and data/posts.json (local)
  */
 export async function saveLocalPosts(posts: Post[]): Promise<boolean> {
   runtimePosts = posts;
 
   if (typeof window === 'undefined') {
     try {
-      const fs = await import('fs');
-      const path = await import('path');
-      const filePath = path.join(process.cwd(), 'data', 'posts.json');
-      fs.writeFileSync(filePath, JSON.stringify(posts, null, 2), 'utf-8');
+      const fs = require('fs');
+      const path = require('path');
+      const jsonStr = JSON.stringify(posts, null, 2);
+
+      // Write to /tmp for Vercel serverless persistence
+      try {
+        fs.writeFileSync('/tmp/nova_posts.json', jsonStr, 'utf-8');
+      } catch (tmpErr) {
+        console.warn('[Posts Storage] Notice writing to /tmp:', tmpErr);
+      }
+
+      // In local dev, also write to data/posts.json
+      try {
+        const localPath = path.join(process.cwd(), 'data', 'posts.json');
+        fs.writeFileSync(localPath, jsonStr, 'utf-8');
+      } catch {
+        // Ignored on read-only serverless filesystems
+      }
+
       return true;
     } catch (err) {
       console.warn('[Posts Storage] Filesystem write notice:', err);

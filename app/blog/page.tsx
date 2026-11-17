@@ -1,23 +1,62 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { ArrowRight, Search, Calendar, Clock, BookOpen } from 'lucide-react';
-import { LOCAL_POSTS } from '@/lib/posts';
+import { LOCAL_POSTS, Post } from '@/lib/posts';
 
 export default function BlogPage() {
+  const [postsList, setPostsList] = useState<Post[]>(LOCAL_POSTS);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = useMemo(() => {
-    const set = new Set(LOCAL_POSTS.map((p) => p.category));
-    return ['All', ...Array.from(set)];
+  // Fetch latest dynamic posts from API on mount
+  useEffect(() => {
+    fetch('/api/posts')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.posts) && data.posts.length > 0) {
+          // Merge with localStorage custom posts if available
+          let allPosts = data.posts;
+          try {
+            const savedCustom = localStorage.getItem('nova_client_posts');
+            if (savedCustom) {
+              const parsed: Post[] = JSON.parse(savedCustom);
+              const existingSlugs = new Set(allPosts.map((p: Post) => p.slug));
+              const missing = parsed.filter((p) => !existingSlugs.has(p.slug));
+              allPosts = [...missing, ...allPosts];
+            }
+          } catch {
+            // ignore
+          }
+          setPostsList(allPosts);
+        }
+      })
+      .catch(() => {
+        // Fallback to localStorage if offline
+        try {
+          const savedCustom = localStorage.getItem('nova_client_posts');
+          if (savedCustom) {
+            const parsed: Post[] = JSON.parse(savedCustom);
+            const existingSlugs = new Set(LOCAL_POSTS.map((p) => p.slug));
+            const missing = parsed.filter((p) => !existingSlugs.has(p.slug));
+            setPostsList([...missing, ...LOCAL_POSTS]);
+          }
+        } catch {
+          // ignore
+        }
+      });
   }, []);
 
+  const categories = useMemo(() => {
+    const set = new Set(postsList.map((p) => p.category));
+    return ['All', ...Array.from(set)];
+  }, [postsList]);
+
   const filteredPosts = useMemo(() => {
-    return LOCAL_POSTS.filter((post) => {
+    return postsList.filter((post) => {
       const matchesCategory =
         selectedCategory === 'All' || post.category.toLowerCase() === selectedCategory.toLowerCase();
       const matchesSearch =
@@ -27,11 +66,11 @@ export default function BlogPage() {
 
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [postsList, selectedCategory, searchQuery]);
 
   const featuredPost = useMemo(() => {
-    return LOCAL_POSTS.find((p) => p.featured) || LOCAL_POSTS[0];
-  }, []);
+    return postsList.find((p) => p.featured) || postsList[0];
+  }, [postsList]);
 
   return (
     <main className="page-wrapper">
