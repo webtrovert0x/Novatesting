@@ -5,10 +5,9 @@ import { Share2, Link as LinkIcon, Check } from 'lucide-react';
 
 interface ShareButtonsProps {
   title: string;
-  slug: string;
 }
 
-export default function ShareButtons({ title, slug }: ShareButtonsProps) {
+export default function ShareButtons({ title }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {

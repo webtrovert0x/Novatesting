@@ -4,8 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowRight, Search, Calendar, Clock, Tag, BookOpen, ShieldCheck, TrendingUp } from 'lucide-react';
+import { ArrowRight, Search, Calendar, Clock, BookOpen } from 'lucide-react';
 import { LOCAL_POSTS } from '@/lib/posts';
 
 export default function BlogPage() {

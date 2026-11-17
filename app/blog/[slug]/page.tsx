@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { getPostBySlug, getAllPosts, getRelatedPosts } from '@/lib/posts';
 import ShareButtons from '@/components/ShareButtons';
-import { Calendar, Clock, ArrowLeft, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -118,7 +118,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
             <Link href="/blog" className="back-to-blog-link">
               <ArrowLeft size={16} /> Back to all articles
             </Link>
-            <ShareButtons title={post.title} slug={post.slug} />
+            <ShareButtons title={post.title} />
           </div>
 
           {/* Article Body */}
@@ -162,7 +162,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
 
           {/* Bottom Share Bar */}
           <div className="article-bottom-share">
-            <ShareButtons title={post.title} slug={post.slug} />
+            <ShareButtons title={post.title} />
           </div>
 
           {/* Consultation CTA Banner */}

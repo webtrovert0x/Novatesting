@@ -21,6 +21,20 @@ export interface Post {
   tags?: string[];
 }
 
+interface WordPressPostRaw {
+  id: number;
+  slug: string;
+  date: string;
+  title?: { rendered?: string };
+  excerpt?: { rendered?: string };
+  content?: { rendered?: string };
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{ source_url?: string }>;
+    'wp:term'?: Array<Array<{ name?: string }>>;
+    author?: Array<{ name?: string }>;
+  };
+}
+
 // In-memory runtime cache
 let runtimePosts: Post[] = [...(defaultPosts as Post[])];
 
@@ -70,7 +84,7 @@ export async function getAllPosts(): Promise<Post[]> {
       });
 
       if (res.ok) {
-        const wpPosts = await res.json();
+        const wpPosts: WordPressPostRaw[] = await res.json();
         if (Array.isArray(wpPosts) && wpPosts.length > 0) {
           return wpPosts.map(transformWordPressPost);
         }
@@ -145,7 +159,7 @@ export async function getAllCategories(): Promise<string[]> {
 /**
  * Adapter: Transforms a WordPress REST API post object into our standard Post interface
  */
-function transformWordPressPost(wpPost: any): Post {
+function transformWordPressPost(wpPost: WordPressPostRaw): Post {
   const featuredMedia = wpPost._embedded?.['wp:featuredmedia']?.[0]?.source_url;
   const categories = wpPost._embedded?.['wp:term']?.[0];
   const primaryCategory = categories?.[0]?.name || 'Insights';
@@ -174,6 +188,6 @@ function transformWordPressPost(wpPost: any): Post {
       role: 'Wealth Advisory Team',
       avatar: '/images/Nova-Finance-Logo1.png',
     },
-    tags: wpPost._embedded?.['wp:term']?.[1]?.map((t: any) => t.name) || [],
+    tags: wpPost._embedded?.['wp:term']?.[1]?.map((t) => t.name || '').filter(Boolean) || [],
   };
 }
