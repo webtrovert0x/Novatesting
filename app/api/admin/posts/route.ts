@@ -2,9 +2,20 @@ import { NextResponse } from 'next/server';
 import { getAllPosts, createPost, deletePost } from '@/lib/posts';
 
 function isAuthorized(request: Request): boolean {
-  const expectedPassword = process.env.ADMIN_PASSWORD || 'nova2026';
+  // 1. Check for authenticated session cookie
+  const cookieHeader = request.headers.get('cookie') || '';
+  if (cookieHeader.includes('nova_admin_session=authenticated')) {
+    return true;
+  }
+
+  // 2. Check for x-admin-key header
+  const expectedPassword = (process.env.ADMIN_PASSWORD || 'nova2026').trim();
   const clientKey = request.headers.get('x-admin-key');
-  return clientKey === expectedPassword;
+  if (clientKey && clientKey.trim() === expectedPassword) {
+    return true;
+  }
+
+  return false;
 }
 
 export async function GET() {

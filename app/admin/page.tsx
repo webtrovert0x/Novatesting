@@ -55,30 +55,37 @@ export default function AdminPage() {
 
   // Check saved session on mount
   useEffect(() => {
-    const saved = sessionStorage.getItem('nova_admin_auth');
-    if (saved) {
-      // Verify stored password
-      fetch('/api/admin/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: saved }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            setIsAuthenticated(true);
-            fetchPosts();
+    fetch('/api/admin/auth')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.authenticated) {
+          setIsAuthenticated(true);
+          fetchPosts();
+        } else {
+          // Check fallback in sessionStorage if cookie wasn't set yet
+          const savedKey = sessionStorage.getItem('nova_admin_auth');
+          if (savedKey) {
+            fetch('/api/admin/auth', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ password: savedKey }),
+            })
+              .then((r) => r.json())
+              .then((d) => {
+                if (d.success) {
+                  setIsAuthenticated(true);
+                  fetchPosts();
+                } else {
+                  setIsAuthenticated(false);
+                }
+              })
+              .catch(() => setIsAuthenticated(false));
           } else {
-            sessionStorage.removeItem('nova_admin_auth');
             setIsAuthenticated(false);
           }
-        })
-        .catch(() => {
-          setIsAuthenticated(false);
-        });
-    } else {
-      setIsAuthenticated(false);
-    }
+        }
+      })
+      .catch(() => setIsAuthenticated(false));
   }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -109,7 +116,12 @@ export default function AdminPage() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/auth', { method: 'DELETE' });
+    } catch {
+      // ignore
+    }
     sessionStorage.removeItem('nova_admin_auth');
     setIsAuthenticated(false);
     setInputPassword('');
@@ -140,6 +152,7 @@ export default function AdminPage() {
     try {
       const res = await fetch(`/api/admin/posts?id=${id}`, {
         method: 'DELETE',
+        credentials: 'same-origin',
         headers: {
           'x-admin-key': key,
         },
@@ -168,6 +181,7 @@ export default function AdminPage() {
     try {
       const res = await fetch('/api/admin/posts', {
         method: 'POST',
+        credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
           'x-admin-key': key,
