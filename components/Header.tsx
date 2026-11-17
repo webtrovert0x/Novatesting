@@ -28,6 +28,7 @@ export default function Header() {
     { name: 'About Us', href: '/about-company' },
     { name: 'Services', href: '/services' },
     { name: 'Our Process', href: '/our-process' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact-us' },
   ];
 
