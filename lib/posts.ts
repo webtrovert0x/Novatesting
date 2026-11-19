@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import defaultPosts from '@/data/posts.json';
+import {
+  fetchSupabasePosts,
+  fetchSupabasePostBySlug,
+  insertSupabasePost,
+  deleteSupabasePost,
+  SupabasePost,
+} from './supabase';
 
 export interface Author {
   name: string;
@@ -39,79 +46,34 @@ interface WordPressPostRaw {
 // In-memory runtime cache
 let runtimePosts: Post[] = [...(defaultPosts as Post[])];
 
-/**
- * Load raw posts from /tmp/nova_posts.json or fallback to data/posts.json
- */
 export function loadLocalPosts(): Post[] {
-  if (typeof window === 'undefined') {
-    try {
-      const fs = require('fs');
-      const tmpPath = '/tmp/nova_posts.json';
-      if (fs.existsSync(tmpPath)) {
-        const data = fs.readFileSync(tmpPath, 'utf-8');
-        const parsed = JSON.parse(data);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          runtimePosts = parsed;
-          return parsed;
-        }
-      }
-    } catch (e) {
-      console.warn('[Posts Loader] Notice reading /tmp/nova_posts.json:', e);
-    }
-  }
-
   return runtimePosts;
-}
-
-/**
- * Save posts to /tmp/nova_posts.json (writable on Vercel/serverless) and data/posts.json (local)
- */
-export async function saveLocalPosts(posts: Post[]): Promise<boolean> {
-  runtimePosts = posts;
-
-  if (typeof window === 'undefined') {
-    try {
-      const fs = require('fs');
-      const path = require('path');
-      const jsonStr = JSON.stringify(posts, null, 2);
-
-      // Write to /tmp for Vercel serverless persistence
-      try {
-        fs.writeFileSync('/tmp/nova_posts.json', jsonStr, 'utf-8');
-      } catch (tmpErr) {
-        console.warn('[Posts Storage] Notice writing to /tmp:', tmpErr);
-      }
-
-      // In local dev, also write to data/posts.json
-      try {
-        const localPath = path.join(process.cwd(), 'data', 'posts.json');
-        fs.writeFileSync(localPath, jsonStr, 'utf-8');
-      } catch {
-        // Ignored on read-only serverless filesystems
-      }
-
-      return true;
-    } catch (err) {
-      console.warn('[Posts Storage] Filesystem write notice:', err);
-    }
-  }
-
-  return true;
 }
 
 export const LOCAL_POSTS: Post[] = defaultPosts as Post[];
 
 /**
- * Fetch all posts
- * Checks if USE_WORDPRESS_BLOG is enabled.
- * If yes, queries WordPress REST API; otherwise returns local posts.
+ * Fetch all posts:
+ * 1. Checks Supabase cloud database first!
+ * 2. Checks WordPress if enabled.
+ * 3. Falls back to pre-seeded local posts if database is empty.
  */
 export async function getAllPosts(): Promise<Post[]> {
-  const useWordPress = process.env.USE_WORDPRESS_BLOG === 'true';
+  // 1. Try Supabase Cloud Database
+  try {
+    const supabasePosts = await fetchSupabasePosts();
+    if (Array.isArray(supabasePosts) && supabasePosts.length > 0) {
+      return supabasePosts.map(transformSupabasePost);
+    }
+  } catch (err) {
+    console.warn('[Supabase Posts Fetch Notice]:', err);
+  }
 
-  if (useWordPress) {
+  // 2. Check WordPress toggle if configured
+  const useWordPress = process.env.USE_WORDPRESS_BLOG === 'true';
+  const wpUrl = process.env.WORDPRESS_API_URL;
+  if (useWordPress && wpUrl) {
     try {
-      const wpUrl = process.env.WORDPRESS_API_URL || 'https://novafinance.tainaliel.com/wp-json/wp/v2';
       const res = await fetch(`${wpUrl}/posts?_embed&per_page=20`, {
         next: { revalidate: 60 },
       });
@@ -123,48 +85,79 @@ export async function getAllPosts(): Promise<Post[]> {
         }
       }
     } catch (err) {
-      console.warn('[WordPress Blog Fetch Notice]: Falling back to local posts:', err);
+      console.warn('[WordPress Blog Fetch Notice]:', err);
     }
   }
 
-  return loadLocalPosts();
+  // 3. Fallback to default posts
+  return defaultPosts as Post[];
 }
 
 /**
  * Get a single post by slug
  */
 export async function getPostBySlug(slug: string): Promise<Post | null> {
+  // Try Supabase directly
+  try {
+    const spPost = await fetchSupabasePostBySlug(slug);
+    if (spPost) {
+      return transformSupabasePost(spPost);
+    }
+  } catch {
+    // fallback
+  }
+
   const posts = await getAllPosts();
   return posts.find((p) => p.slug === slug) || null;
 }
 
 /**
- * Create a new post
+ * Create a new post:
+ * Persists directly into Supabase database!
  */
 export async function createPost(newPostData: Omit<Post, 'id'>): Promise<Post> {
-  const posts = loadLocalPosts();
   const id = String(Date.now());
   const post: Post = {
     ...newPostData,
     id,
   };
 
-  const updatedPosts = [post, ...posts];
-  await saveLocalPosts(updatedPosts);
+  // Convert to Supabase schema
+  const supabasePayload: SupabasePost = {
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt,
+    content: post.content,
+    category: post.category,
+    cover_image: post.coverImage,
+    date: post.date,
+    read_time: post.readTime,
+    author: post.author,
+    tags: post.tags || [],
+    featured: Boolean(post.featured),
+  };
+
+  // 1. Insert into Supabase cloud PostgreSQL
+  const savedToSupabase = await insertSupabasePost(supabasePayload);
+  if (!savedToSupabase) {
+    console.warn('[Supabase Warning] Post could not be inserted into Supabase cloud table. Falling back to local memory.');
+  }
+
+  // 2. Also keep in-memory cache updated
+  runtimePosts = [post, ...runtimePosts];
+
   return post;
 }
 
 /**
- * Delete a post by ID
+ * Delete a post by ID or slug
  */
 export async function deletePost(id: string): Promise<boolean> {
-  const posts = loadLocalPosts();
-  const filtered = posts.filter((p) => p.id !== id);
-  if (filtered.length !== posts.length) {
-    await saveLocalPosts(filtered);
-    return true;
-  }
-  return false;
+  // Delete from Supabase
+  await deleteSupabasePost(id);
+
+  runtimePosts = runtimePosts.filter((p) => p.id !== id && p.slug !== id);
+  return true;
 }
 
 /**
@@ -190,7 +183,31 @@ export async function getAllCategories(): Promise<string[]> {
 }
 
 /**
- * Adapter: Transforms a WordPress REST API post object into our standard Post interface
+ * Adapter: Transforms Supabase DB row into Post interface
+ */
+function transformSupabasePost(sp: SupabasePost): Post {
+  return {
+    id: String(sp.id || sp.slug),
+    slug: sp.slug,
+    title: sp.title,
+    excerpt: sp.excerpt,
+    content: sp.content,
+    category: sp.category,
+    date: sp.date,
+    readTime: sp.read_time,
+    coverImage: sp.cover_image,
+    featured: sp.featured,
+    author: sp.author || {
+      name: 'Advisory Team',
+      role: 'Senior Wealth Strategist',
+      avatar: '/images/Nova-Finance-Logo1.png',
+    },
+    tags: sp.tags || [],
+  };
+}
+
+/**
+ * Adapter: Transforms a WordPress REST API post object into standard Post interface
  */
 function transformWordPressPost(wpPost: WordPressPostRaw): Post {
   const featuredMedia = wpPost._embedded?.['wp:featuredmedia']?.[0]?.source_url;

@@ -11,15 +11,24 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { password } = body;
 
-    const expectedPassword = (process.env.ADMIN_PASSWORD || 'nova2026').trim();
+    const expectedPassword = process.env.ADMIN_PASSWORD;
 
-    if (password && password.trim() === expectedPassword) {
+    // Reject immediately if no ADMIN_PASSWORD is set in environment
+    if (!expectedPassword) {
+      console.warn('[Admin Auth] ADMIN_PASSWORD environment variable is not configured.');
+      return NextResponse.json(
+        { success: false, message: 'Admin authentication is not configured in server environment.' },
+        { status: 500 }
+      );
+    }
+
+    if (password && password.trim() === expectedPassword.trim()) {
       const response = NextResponse.json({
         success: true,
         message: 'Authenticated successfully',
       });
 
-      // Secure HTTP-only cookie
+      // Secure HTTP-only cookie (inaccessible to JavaScript / XSS)
       response.cookies.set('nova_admin_session', 'authenticated', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',

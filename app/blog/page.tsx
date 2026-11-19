@@ -18,35 +18,11 @@ export default function BlogPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.posts) && data.posts.length > 0) {
-          // Merge with localStorage custom posts if available
-          let allPosts = data.posts;
-          try {
-            const savedCustom = localStorage.getItem('nova_client_posts');
-            if (savedCustom) {
-              const parsed: Post[] = JSON.parse(savedCustom);
-              const existingSlugs = new Set(allPosts.map((p: Post) => p.slug));
-              const missing = parsed.filter((p) => !existingSlugs.has(p.slug));
-              allPosts = [...missing, ...allPosts];
-            }
-          } catch {
-            // ignore
-          }
-          setPostsList(allPosts);
+          setPostsList(data.posts);
         }
       })
-      .catch(() => {
-        // Fallback to localStorage if offline
-        try {
-          const savedCustom = localStorage.getItem('nova_client_posts');
-          if (savedCustom) {
-            const parsed: Post[] = JSON.parse(savedCustom);
-            const existingSlugs = new Set(LOCAL_POSTS.map((p) => p.slug));
-            const missing = parsed.filter((p) => !existingSlugs.has(p.slug));
-            setPostsList([...missing, ...LOCAL_POSTS]);
-          }
-        } catch {
-          // ignore
-        }
+      .catch((err) => {
+        console.warn('Notice loading posts from API:', err);
       });
   }, []);
 

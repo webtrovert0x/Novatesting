@@ -2,16 +2,16 @@ import { NextResponse } from 'next/server';
 import { getAllPosts, createPost, deletePost } from '@/lib/posts';
 
 function isAuthorized(request: Request): boolean {
-  // 1. Check for authenticated session cookie
+  // 1. Check for authenticated HTTP-only session cookie
   const cookieHeader = request.headers.get('cookie') || '';
   if (cookieHeader.includes('nova_admin_session=authenticated')) {
     return true;
   }
 
-  // 2. Check for x-admin-key header
-  const expectedPassword = (process.env.ADMIN_PASSWORD || 'nova2026').trim();
+  // 2. Check for optional direct admin key if configured
+  const expectedPassword = process.env.ADMIN_PASSWORD;
   const clientKey = request.headers.get('x-admin-key');
-  if (clientKey && clientKey.trim() === expectedPassword) {
+  if (expectedPassword && clientKey && clientKey.trim() === expectedPassword.trim()) {
     return true;
   }
 
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
   try {
     if (!isAuthorized(request)) {
       return NextResponse.json(
-        { success: false, message: 'Unauthorized. Invalid admin password.' },
+        { success: false, message: 'Unauthorized. Invalid or missing admin credentials.' },
         { status: 401 }
       );
     }
@@ -112,7 +112,7 @@ export async function DELETE(request: Request) {
   try {
     if (!isAuthorized(request)) {
       return NextResponse.json(
-        { success: false, message: 'Unauthorized. Invalid admin password.' },
+        { success: false, message: 'Unauthorized. Invalid or missing admin credentials.' },
         { status: 401 }
       );
     }

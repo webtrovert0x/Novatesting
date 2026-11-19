@@ -62,27 +62,7 @@ export default function AdminPage() {
           setIsAuthenticated(true);
           fetchPosts();
         } else {
-          // Check fallback in sessionStorage if cookie wasn't set yet
-          const savedKey = sessionStorage.getItem('nova_admin_auth');
-          if (savedKey) {
-            fetch('/api/admin/auth', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ password: savedKey }),
-            })
-              .then((r) => r.json())
-              .then((d) => {
-                if (d.success) {
-                  setIsAuthenticated(true);
-                  fetchPosts();
-                } else {
-                  setIsAuthenticated(false);
-                }
-              })
-              .catch(() => setIsAuthenticated(false));
-          } else {
-            setIsAuthenticated(false);
-          }
+          setIsAuthenticated(false);
         }
       })
       .catch(() => setIsAuthenticated(false));
@@ -103,7 +83,6 @@ export default function AdminPage() {
       const data = await res.json();
 
       if (data.success) {
-        sessionStorage.setItem('nova_admin_auth', inputPassword);
         setIsAuthenticated(true);
         fetchPosts();
       } else {
@@ -122,7 +101,6 @@ export default function AdminPage() {
     } catch {
       // ignore
     }
-    sessionStorage.removeItem('nova_admin_auth');
     setIsAuthenticated(false);
     setInputPassword('');
   };
@@ -147,15 +125,11 @@ export default function AdminPage() {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this article?')) return;
     setDeleteId(id);
-    const key = sessionStorage.getItem('nova_admin_auth') || '';
 
     try {
       const res = await fetch(`/api/admin/posts?id=${id}`, {
         method: 'DELETE',
         credentials: 'same-origin',
-        headers: {
-          'x-admin-key': key,
-        },
       });
       const data = await res.json();
       if (data.success) {
@@ -176,15 +150,12 @@ export default function AdminPage() {
     setSubmitSuccess(null);
     setSubmitError(null);
 
-    const key = sessionStorage.getItem('nova_admin_auth') || '';
-
     try {
       const res = await fetch('/api/admin/posts', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
-          'x-admin-key': key,
         },
         body: JSON.stringify({
           title,
@@ -204,13 +175,6 @@ export default function AdminPage() {
 
       if (data.success) {
         setSubmitSuccess(`Published successfully! Slug: /blog/${data.post.slug}`);
-        try {
-          const existing = JSON.parse(localStorage.getItem('nova_client_posts') || '[]');
-          const filtered = existing.filter((p: { slug: string }) => p.slug !== data.post.slug);
-          localStorage.setItem('nova_client_posts', JSON.stringify([data.post, ...filtered]));
-        } catch {
-          // ignore
-        }
         fetchPosts();
         setTitle('');
         setSlug('');
